@@ -1,0 +1,816 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Github.png">
+  <link rel="icon" href="/img/Github.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ling yi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="利用地图展示当天各地的新闻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mapNews项目">
+<meta property="og:url" content="https://anonymouslosty.github.io/2022/09/16/mapNews/mapNews/index.html">
+<meta property="og:site_name" content="anonymouslosty的Blog">
+<meta property="og:description" content="利用地图展示当天各地的新闻">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/mapNews1.png">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/mapNews2.png">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/mapNews3.png">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/mapNews4.png">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/mapNews5.png">
+<meta property="article:published_time" content="2022-09-16T06:39:02.000Z">
+<meta property="article:modified_time" content="2022-09-21T14:00:08.000Z">
+<meta property="article:author" content="Ling yi">
+<meta property="article:tag" content="WebGIS">
+<meta property="article:tag" content="Angular">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://anonymouslosty.github.io/img/mapNews1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>mapNews项目 - anonymouslosty的Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"anonymouslosty.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 80vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>o1的Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/band.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="mapNews项目"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-16 14:39" pubdate>
+          2022年9月16日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          103 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+    <a target="_blank" rel="noopener" href="https://your-url" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">mapNews项目</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h4 id="0-概述"><a href="#0-概述" class="headerlink" title="0.概述"></a>0.概述</h4><ol>
+<li>项目需求：利用地图展示当天各地的新闻（新闻发生点可视化）<ul>
+<li>想法：龙老师的当代地图学进展，地图是信息的载体</li>
+<li>新闻这种信息（时间<code>t</code>、地点<code>x,y</code>、任务<code>z</code>）完美适合地图</li>
+<li>之前对地图的信息理解只停留在地理数据上，没有人文数据</li>
+<li>暑期项目没有使用到数据库的知识，可能需要学习</li>
+<li>想测试一下数据在数据库中处理和在后端代码中处理的速度对比</li>
+</ul>
+</li>
+<li>项目框架：<ul>
+<li>前端框架：<code>Angular</code>  （真的只是框架，搭了个界面而已）</li>
+<li>后端：<code>Nodejs</code></li>
+<li>数据库服务：<code>Sqlite</code></li>
+</ul>
+</li>
+<li>具体需求<ul>
+<li>具有可视化地图功能，利用<code>leafletJS</code>实现</li>
+<li>后端自动爬取<a href="www.chinanews.com">中国新闻网</a>内容，并将相关数据存储到数据库<code>News.db</code>中<ul>
+<li>标题、内容、发布时间</li>
+<li>网页链接、内容摘要、编码格式、爬取时间</li>
+</ul>
+<p>	</p>
+</li>
+<li>（提前）建立<code>Position.db</code>数据库，存储地名以及坐标（经纬度）</li>
+<li><code>New.db</code>中新闻内容<code>News.content</code>与<code>Position.db</code>中地名<code>Position.city</code>模糊匹配得到新闻经纬度</li>
+<li>前端利用新闻经纬度进行可视化</li>
+</ul>
+</li>
+</ol>
+<h4 id="1-用到的模块"><a href="#1-用到的模块" class="headerlink" title="1.用到的模块"></a>1.用到的模块</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> myCheerio = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cheerio&#x27;</span>);<br><span class="hljs-comment">//cheerio 用在服务器端需要对DOM进行操作的地方</span><br><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><span class="hljs-comment">//用于前后端通信</span><br><span class="hljs-keyword">const</span> axios = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;axios&#x27;</span>);<br><span class="hljs-comment">//用于前后端通信</span><br><br><span class="hljs-keyword">const</span> <span class="hljs-title class_">SqliteDB</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./sqlite.js&#x27;</span>).<span class="hljs-property">SqliteDB</span>;<br><span class="hljs-comment">//用于操作Sqlite数据库，sqlite.js封装好的文件 </span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//sqlite.js</span><br><br><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);<br><span class="hljs-keyword">var</span> sqlite3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;sqlite3&#x27;</span>).<span class="hljs-title function_">verbose</span>();<br><span class="hljs-keyword">var</span> <span class="hljs-variable constant_">DB</span> = <span class="hljs-variable constant_">DB</span> || &#123;&#125;;<br><br><span class="hljs-variable constant_">DB</span>.<span class="hljs-property">SqliteDB</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">file</span>) &#123;<br>    filePath = <span class="hljs-string">&#x27;/Users/lingyi/postGraduate/codeMapNews/server/Database/&#x27;</span> + file;<br>  	<span class="hljs-comment">//存储路径</span><br>    <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span> = <span class="hljs-keyword">new</span> sqlite3.<span class="hljs-title class_">Database</span>(filePath);<br>    <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">exist</span> = fs.<span class="hljs-title function_">existsSync</span>(filePath);<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-variable constant_">DB</span>.<span class="hljs-property">exist</span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Creating db file!&quot;</span>);<br>        fs.<span class="hljs-title function_">openSync</span>(filePath, <span class="hljs-string">&#x27;w&#x27;</span>);<br>    &#125;;<br><br>&#125;;<br><br><span class="hljs-variable constant_">DB</span>.<span class="hljs-property">printErrorInfo</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Error Message:&quot;</span> + err.<span class="hljs-property">message</span> + <span class="hljs-string">&quot; ErrorNumber:&quot;</span>);<br>&#125;;<br><br><span class="hljs-variable constant_">DB</span>.<span class="hljs-property">SqliteDB</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">createTable</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">sql</span>) &#123;<br>    <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span>.<span class="hljs-title function_">serialize</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span>.<span class="hljs-title function_">run</span>(sql, <span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> != err) &#123;<br>                <span class="hljs-variable constant_">DB</span>.<span class="hljs-title function_">printErrorInfo</span>(err);<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>        &#125;);<br>    &#125;);<br>&#125;;<br><br><span class="hljs-comment">/// insert newsData Format </span><br><span class="hljs-comment">//[[title, content, publish_date, url, source_name,source_encoding, crawltime]]</span><br><span class="hljs-variable constant_">DB</span>.<span class="hljs-property">SqliteDB</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">insertData</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">sql, objects</span>) &#123;<br>    <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span>.<span class="hljs-title function_">serialize</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">var</span> stmt = <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span>.<span class="hljs-title function_">prepare</span>(sql);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; objects.<span class="hljs-property">length</span>; ++i) &#123;<br>            stmt.<span class="hljs-title function_">run</span>(objects[i]);<br>        &#125;<br>        stmt.<span class="hljs-title function_">finalize</span>();<br>    &#125;);<br><br>&#125;;<br><br><span class="hljs-comment">//这里对数据库的插入操作进行了改写，后端代码需要等数据库数据读取完之后在进行操作</span><br><span class="hljs-comment">//写成Promise的格式</span><br><span class="hljs-variable constant_">DB</span>.<span class="hljs-property">SqliteDB</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">queryData</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">sql</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>        <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span>.<span class="hljs-title function_">all</span>(sql, <span class="hljs-keyword">function</span> (<span class="hljs-params">err, rows</span>) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> != err) &#123;<br>                <span class="hljs-variable constant_">DB</span>.<span class="hljs-title function_">printErrorInfo</span>(err);<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>            <span class="hljs-title function_">resolve</span>(rows)<br>        &#125;);<br>    &#125;)<br>&#125;;<br><br><span class="hljs-variable constant_">DB</span>.<span class="hljs-property">SqliteDB</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">executeSql</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">sql</span>) &#123;<br>    <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span>.<span class="hljs-title function_">run</span>(sql, <span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> != err) &#123;<br>            <span class="hljs-variable constant_">DB</span>.<span class="hljs-title function_">printErrorInfo</span>(err);<br>        &#125;<br>    &#125;);<br>&#125;;<br><br><span class="hljs-variable constant_">DB</span>.<span class="hljs-property">SqliteDB</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">close</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">db</span>.<span class="hljs-title function_">close</span>();<br>&#125;;<br><br><span class="hljs-comment">/// export SqliteDB.</span><br><span class="hljs-built_in">exports</span>.<span class="hljs-property">SqliteDB</span> = <span class="hljs-variable constant_">DB</span>.<span class="hljs-property">SqliteDB</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-具体功能的实现"><a href="#2-具体功能的实现" class="headerlink" title="2. 具体功能的实现"></a>2. 具体功能的实现</h4><h5 id="1-服务的启动"><a href="#1-服务的启动" class="headerlink" title="1. 服务的启动"></a>1. 服务的启动</h5><ul>
+<li>使用到了<code>express模块</code></li>
+</ul>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();<br>app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">8082</span>,<span class="hljs-function">()=&gt;</span>&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Server is running on localhost:8082&#x27;</span>)<br>&#125;)<br><span class="hljs-comment">//在8082端口启动服务</span><br></code></pre></td></tr></table></figure>
+<h5 id="2-响应前端请求"><a href="#2-响应前端请求" class="headerlink" title="2.响应前端请求"></a>2.响应前端请求</h5><ul>
+<li>用到的模块：<code>axios</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/server&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>   <span class="hljs-comment">//设置请求头 允许跨域</span><br>    res.<span class="hljs-title function_">setHeader</span>(<span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="hljs-string">&#x27;*&#x27;</span>);<br>    <span class="hljs-title function_">reqNewsData</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>      <span class="hljs-comment">//向前端发送数据</span><br>        res.<span class="hljs-title function_">send</span>(data)<br>    &#125;)<br>&#125;)<br><br></code></pre></td></tr></table></figure>
+<h5 id="3-数据库的建立"><a href="#3-数据库的建立" class="headerlink" title="3. 数据库的建立"></a>3. 数据库的建立</h5><ul>
+<li>使用到了<code>sqlite.js</code>（见上文）</li>
+</ul>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> file = <span class="hljs-string">&#x27;News.db&#x27;</span>;<br><span class="hljs-keyword">var</span> sqliteDBNews = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SqliteDB</span>(file); <br><span class="hljs-comment">//在本地新建名为News.db的数据库</span><br><span class="hljs-keyword">let</span> createNewsTableSql = <span class="hljs-string">&quot;create table if not exists News(title TEXT,content TEXT,publish_date TEXT,url TEXT,source_name TEXT,source_encoding TETX,crawltime TEXT)&quot;</span>;<br><span class="hljs-comment">//News.db数据库建表规则</span><br><span class="hljs-keyword">let</span> insertNewsSql = <span class="hljs-string">&quot;insert OR IGNORE into News(title,content,publish_date,url,source_name,source_encoding,crawltime) values(?,?,?,?,?,?,?)&quot;</span>;<br><span class="hljs-comment">//News.db数据库News表数据插入规则</span><br>sqliteDBNews.<span class="hljs-title function_">createTable</span>(createNewsTableSql);<br><span class="hljs-comment">//创建News表</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="4-新闻数据的处理"><a href="#4-新闻数据的处理" class="headerlink" title="4. 新闻数据的处理"></a>4. 新闻数据的处理</h5><ul>
+<li>使用到了<code>cheerio</code>模块</li>
+</ul>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//设置头文件 避免爬虫被屏蔽</span><br><span class="hljs-keyword">let</span> headers = &#123;<br>    <span class="hljs-string">&#x27;User-Agent&#x27;</span>: <span class="hljs-string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36&#x27;</span><br>&#125;<br><br><span class="hljs-comment">//发送请求,获得根页面所有信息，利用reqCallback()函数对根网页中的新闻页面进行进一步解析</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">reqNewsData</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>        axios.<span class="hljs-title function_">get</span>(seedURL, &#123;<br>            <span class="hljs-attr">params</span>: &#123;<br>                <span class="hljs-attr">url</span>: seedURL,<br>                <span class="hljs-attr">encoding</span>: <span class="hljs-literal">null</span>,<br>                <span class="hljs-attr">headers</span>: headers,<br>                <span class="hljs-attr">timeout</span>: <span class="hljs-number">10000</span> <span class="hljs-comment">//</span><br>            &#125;<br>        &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;<br>            <span class="hljs-title function_">reqCallback</span>(response.<span class="hljs-property">data</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>                <span class="hljs-title function_">resolve</span>(data)<br>            &#125;)<br>        &#125;)<br>    &#125;)<br>&#125;<br><br><span class="hljs-comment">//解析根页面中的网页链接，得到具体新闻的链接，交给newsGet()函数处理具体的</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">reqCallback</span>(<span class="hljs-params">body</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>         <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">// console.log(html);</span><br>        <span class="hljs-comment">//用cheerio解析html</span><br>        <span class="hljs-keyword">var</span> $ = myCheerio.<span class="hljs-title function_">load</span>(body, &#123; <span class="hljs-attr">decodeEntities</span>: <span class="hljs-literal">true</span> &#125;);<br>         &#125; <span class="hljs-keyword">catch</span> (e) &#123; <br>           <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;读种子页面并转码出错：&#x27;</span> + e)<br>         &#125;;<br>        <span class="hljs-keyword">var</span> seedurl_news;<br>        <span class="hljs-keyword">try</span> &#123;<br>            seedurl_news = <span class="hljs-built_in">eval</span>(seedURL_format);<br>            <span class="hljs-comment">// console.log(seedurl_news);</span><br>        &#125; <span class="hljs-keyword">catch</span> (e) &#123; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;url列表所处的html块识别出错：&#x27;</span> + e) &#125;;<br>        seedurl_news.<span class="hljs-title function_">each</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">i, e</span>) &#123; <span class="hljs-comment">//遍历种子页面里所有的a链接</span><br>            <span class="hljs-keyword">var</span> myURL = <span class="hljs-string">&quot;&quot;</span>;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">//得到具体新闻url</span><br>                <span class="hljs-keyword">var</span> href = <span class="hljs-string">&quot;&quot;</span>;<br>                href = $(e).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&quot;href&quot;</span>);<br>                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> (href) == <span class="hljs-string">&quot;undefined&quot;</span>) &#123;  <span class="hljs-comment">// 有些网页地址undefined</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (href.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;http://&#x27;</span>) &gt;= <span class="hljs-number">0</span> || href.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;https://&#x27;</span>) &gt;= <span class="hljs-number">0</span> &amp;&amp; href.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;shtml&#x27;</span>))<br>                    myURL = href; <span class="hljs-comment">//http://开头的或者https://开头</span><br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (href.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">&#x27;//&#x27;</span>))<br>                    myURL = <span class="hljs-string">&#x27;http:&#x27;</span> + href; <span class="hljs-comment">//开头的</span><br>                <span class="hljs-keyword">else</span><br>                    myURL = seedURL.<span class="hljs-title function_">substr</span>(<span class="hljs-number">0</span>, seedURL.<span class="hljs-title function_">lastIndexOf</span>(<span class="hljs-string">&#x27;/&#x27;</span>) + <span class="hljs-number">1</span>) + href; <span class="hljs-comment">//其他</span><br>            &#125;<br>            <span class="hljs-keyword">catch</span> (e) &#123;<br>                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;识别种子页面中的新闻链接出错：&#x27;</span> + e)<br>            &#125;<br>            <span class="hljs-keyword">if</span> (!url_reg.<span class="hljs-title function_">test</span>(myURL)) &#123;<br>                <span class="hljs-comment">//检验是否符合新闻url的正则表达式</span><br>                <span class="hljs-comment">// console.log(url_reg.test(myURL));</span><br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>          <span class="hljs-comment">//利用newsGet()函数解析具体的网页</span><br>            <span class="hljs-title function_">newsGet</span>(myURL).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>                <span class="hljs-title function_">resolve</span>(data)    <br>            &#125;); <br>        &#125;);<br>    &#125;)<br>&#125;<br><br><span class="hljs-comment">//设置具体新闻网页的解析规范，要自己到具体的网页Elemens里去查找、获取DOM元素</span><br><span class="hljs-comment">//利用了jQuery  eval函数 计算某个字符串，并执行其中的JS代码 因此将jQuery写为String模板</span><br><span class="hljs-keyword">const</span> seedURL_format = <span class="hljs-string">&quot;$(&#x27;a&#x27;)&quot;</span>;<br><span class="hljs-keyword">const</span> keywords_format = <span class="hljs-string">&quot; $(&#x27;meta[name=\&quot;keywords\&quot;]&#x27;).eq(0).attr(\&quot;content\&quot;)&quot;</span>;<br><span class="hljs-keyword">const</span> title_format = <span class="hljs-string">&quot;$(&#x27;title&#x27;).text()&quot;</span>;<br><span class="hljs-keyword">const</span> date_format = <span class="hljs-string">&quot;$(&#x27;#pubtime_baidu&#x27;).text()&quot;</span>;<br><span class="hljs-keyword">const</span> engDate_format = <span class="hljs-string">&quot;$(&#x27;.downinfo.dottlne&#x27;).children(&#x27;span&#x27;).eq(0).text()&quot;</span><br><span class="hljs-keyword">const</span> author_format = <span class="hljs-string">&quot;$(&#x27;#author_baidu&#x27;).text()&quot;</span><br><span class="hljs-keyword">const</span> engAuthor_format = <span class="hljs-string">&quot;$(&#x27;.downinfo.dottlne&#x27;).children(&#x27;span&#x27;).eq(2).text()&quot;</span><br><span class="hljs-keyword">const</span> content_format = <span class="hljs-string">&quot;$(&#x27;.left_zw&#x27;).children(&#x27;p&#x27;).text()&quot;</span>;<br><span class="hljs-keyword">const</span> engContent_format = <span class="hljs-string">&quot;$(&#x27;.content&#x27;).children(&#x27;p&#x27;).text()&quot;</span>;<br><span class="hljs-keyword">const</span> desc_format = <span class="hljs-string">&quot; $(&#x27;meta[name=\&quot;description\&quot;]&#x27;).eq(0).attr(\&quot;content\&quot;)&quot;</span>;<br><span class="hljs-keyword">const</span> source_format = <span class="hljs-string">&quot;$(&#x27;#source_baidu&#x27;).text()&quot;</span>;<br><span class="hljs-comment">//匹配具体的新闻网页格式</span><br><span class="hljs-keyword">const</span> url_reg = <span class="hljs-regexp">/[a-zA-z]+:\/\/[^\s]*[1-9]\d&#123;5&#125;(?!\d).shtml/</span>;<br><br><span class="hljs-comment">//解析新闻页面并进行后续处理</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">newsGet</span>(<span class="hljs-params">myURL</span>) &#123; <br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>        axios.<span class="hljs-title function_">get</span>(myURL, &#123;<br>            <span class="hljs-attr">params</span>: &#123;<br>                <span class="hljs-attr">url</span>: myURL,<br>                <span class="hljs-attr">encoding</span>: <span class="hljs-literal">null</span>,<br>                <span class="hljs-attr">headers</span>: headers,<br>            &#125;<br>        &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">async</span> response =&gt; &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//用cheerio解析html</span><br>            <span class="hljs-keyword">var</span> $ = myCheerio.<span class="hljs-title function_">load</span>(response.<span class="hljs-property">data</span>, &#123; <span class="hljs-attr">decodeEntities</span>: <span class="hljs-literal">true</span> &#125;);<br>            &#125; <span class="hljs-keyword">catch</span> (e) &#123;    <br>              <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;读新闻页面并转码出错：&#x27;</span> + e);<br>            &#125;;<br>            <span class="hljs-comment">// console.log(&quot;转码读取成功:&quot; + myURL);</span><br>            <span class="hljs-comment">//动态执行format字符串，构建json对象准备写入文件或数据库</span><br>            <span class="hljs-keyword">var</span> fetch = &#123;&#125;;<br>            fetch.<span class="hljs-property">title</span> = <span class="hljs-string">&quot;&quot;</span>;<br>            fetch.<span class="hljs-property">content</span> = <span class="hljs-string">&quot;&quot;</span>;<br>            fetch.<span class="hljs-property">publish_date</span> = (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()).<span class="hljs-title function_">toFormat</span>(<span class="hljs-string">&quot;YYYY-MM-DD&quot;</span>);<br>            <span class="hljs-comment">//fetch.html = myhtml;</span><br>            fetch.<span class="hljs-property">url</span> = myURL;<br>            fetch.<span class="hljs-property">source_name</span> = source_name;<br>            fetch.<span class="hljs-property">source_encoding</span> = myEncoding; <span class="hljs-comment">//编码</span><br>            fetch.<span class="hljs-property">crawltime</span> = (<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()).<span class="hljs-title function_">toFormat</span>(<span class="hljs-string">&quot;YYYY-MM-DD&quot;</span>);<br><br>            <span class="hljs-comment">//没有关键词就用sourcename</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">eval</span>(keywords_format) == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                fetch.<span class="hljs-property">keywords</span> = source_name;  <br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                fetch.<span class="hljs-property">keywords</span> = <span class="hljs-built_in">eval</span>(keywords_format);<br>            &#125;<br>						<span class="hljs-comment">//没有title就用空字符串，不过一般都会有</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">eval</span>(title_format) == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                fetch.<span class="hljs-property">title</span> = <span class="hljs-string">&quot;&quot;</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                fetch.<span class="hljs-property">title</span> = <span class="hljs-built_in">eval</span>(title_format); <span class="hljs-comment">//标题</span><br>            &#125;<br>						<span class="hljs-comment">//日期格式处理</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">eval</span>(date_format) != <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                fetch.<span class="hljs-property">publish_date</span> = <span class="hljs-built_in">eval</span>(date_format); <span class="hljs-comment">//刊登日期</span><br>                <span class="hljs-keyword">let</span> regExp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(fetch.<span class="hljs-property">publish_date</span>)<br>                fetch.<span class="hljs-property">publish_date</span> = regExp.<span class="hljs-title function_">exec</span>(fetch.<span class="hljs-property">publish_date</span>)[<span class="hljs-number">0</span>];<br>                fetch.<span class="hljs-property">publish_date</span> = fetch.<span class="hljs-property">publish_date</span>.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;年&#x27;</span>, <span class="hljs-string">&#x27;-&#x27;</span>)<br>                fetch.<span class="hljs-property">publish_date</span> = fetch.<span class="hljs-property">publish_date</span>.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;月&#x27;</span>, <span class="hljs-string">&#x27;-&#x27;</span>)<br>                fetch.<span class="hljs-property">publish_date</span> = fetch.<span class="hljs-property">publish_date</span>.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;日&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)<br>                <span class="hljs-comment">// fetch.publish_date = new Date(fetch.publish_date).toFormat(&quot;YYYY-MM-DD HH:mm:ss&quot;);</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                fetch.<span class="hljs-property">publish_date</span> = <span class="hljs-built_in">eval</span>(engDate_format);<br>            &#125;<br>						<span class="hljs-comment">//作者信息处理</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">eval</span>(author_format) == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                fetch.<span class="hljs-property">author</span> = <span class="hljs-built_in">eval</span>(engAuthor_format).<span class="hljs-title function_">replace</span>(<span class="hljs-string">&quot;\r\n&quot;</span>, <span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">//eval(author_format);  //作者</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                fetch.<span class="hljs-property">author</span> = <span class="hljs-built_in">eval</span>(author_format);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">eval</span>(content_format) == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                fetch.<span class="hljs-property">content</span> = <span class="hljs-built_in">eval</span>(engContent_format);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                fetch.<span class="hljs-property">content</span> = <span class="hljs-built_in">eval</span>(content_format).<span class="hljs-title function_">replace</span>(<span class="hljs-string">&quot;\r\n&quot;</span> + fetch.<span class="hljs-property">author</span>, <span class="hljs-string">&quot;&quot;</span>); <br>              <span class="hljs-comment">//内容,是否要去掉作者信息自行决定</span><br>            &#125;<br>          	<span class="hljs-comment">//来源处理</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">eval</span>(source_format) == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                fetch.<span class="hljs-property">source</span> = fetch.<span class="hljs-property">source_name</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                fetch.<span class="hljs-property">source</span> = <span class="hljs-built_in">eval</span>(source_format).<span class="hljs-title function_">replace</span>(<span class="hljs-string">&quot;\r\n&quot;</span>, <span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">//来源    </span><br>            &#125;<br>          	<span class="hljs-comment">//摘要信息处理</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">eval</span>(desc_format) == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                fetch.<span class="hljs-property">desc</span> = fetch.<span class="hljs-property">title</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                fetch.<span class="hljs-property">desc</span> = <span class="hljs-built_in">eval</span>(desc_format); <span class="hljs-comment">//摘要   </span><br>            &#125;<br>          	<span class="hljs-comment">//如果新闻中没有文字正文，或者没有发布日期，跳过该文章，return</span><br>            <span class="hljs-keyword">if</span> (fetch.<span class="hljs-property">content</span> == <span class="hljs-string">&quot;&quot;</span> || fetch.<span class="hljs-property">publish_date</span> == <span class="hljs-string">&quot;&quot;</span>) &#123;<br>                <span class="hljs-keyword">return</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>              <span class="hljs-comment">//设置数据库插入元组</span><br>                <span class="hljs-keyword">var</span> newsCell = [[fetch.<span class="hljs-property">title</span>, fetch.<span class="hljs-property">content</span>, fetch.<span class="hljs-property">publish_date</span>, fetch.<span class="hljs-property">url</span>, fetch.<span class="hljs-property">source_name</span>, fetch.<span class="hljs-property">source_encoding</span>, fetch.<span class="hljs-property">crawltime</span>]];<br>              <span class="hljs-comment">//将文章信息添加进数据库</span><br>                sqliteDBNews.<span class="hljs-title function_">insertData</span>(insertNewsSql, newsCell);<br>               <span class="hljs-comment">//设置数据库查询语句，匹配新闻正文中出现的城市与城市所在经纬度</span><br>                <span class="hljs-keyword">var</span> querySql = <span class="hljs-string">`</span><br><span class="hljs-string">                SELECT</span><br><span class="hljs-string">                Location.*,News.*</span><br><span class="hljs-string">                    FROM</span><br><span class="hljs-string">                        Location</span><br><span class="hljs-string">                        INNER JOIN News </span><br><span class="hljs-string">                    WHERE</span><br><span class="hljs-string">                        News.content LIKE &#x27;%&#x27;||Location.city||&#x27;%&#x27;`</span>;<br>               <span class="hljs-comment">//执行数据库查询语句，作为Promise返回</span><br>                <span class="hljs-keyword">await</span> sqliteDBNews.<span class="hljs-title function_">queryData</span>(querySql).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) &#123;<br>                    <span class="hljs-title function_">resolve</span>(data)<br>                &#125;)<br>                <span class="hljs-comment">//存储json</span><br>              <span class="hljs-comment">// var filename = source_name + &quot;_&quot; + (new Date()).toFormat(&quot;YYYY-MM-DD&quot;) +</span><br>                 <span class="hljs-comment">//   &quot;_&quot; + myURL.substr(myURL.lastIndexOf(&#x27;/&#x27;) + 1) + &quot;.json&quot;;</span><br>                <span class="hljs-comment">// fs.writeFileSync(&#x27;/Users/lingyi/postGraduate/codeMapNews/server/News/&#x27; + filename, JSON.stringify(fetch));</span><br>            &#125;<br>        &#125;)<br>    &#125;)<br>    <span class="hljs-comment">// &#125;);</span><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="5-对执行顺序的一些说明"><a href="#5-对执行顺序的一些说明" class="headerlink" title="5.对执行顺序的一些说明"></a>5.对执行顺序的一些说明</h5><ol>
+<li><p>后端服务启动 （1）</p>
+</li>
+<li><p>前端发送请求进入 （2）</p>
+<ul>
+<li>进入（4）函数<code>reqNewsData()</code>，等待<code>reqCallback()</code>函数期约完成<ul>
+<li><code>resolve </code>  <code>reqNewsData()</code>期约返回的<code>Promise</code>数据(数据库运算完成的新闻数据，包含(content、latitude、longitude))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>函数<code>reqNewsData()</code>等待<code>reqCallback()</code>期约完成，</p>
+<ul>
+<li><code>resolve </code>  <code>reqCallback()</code>期约返回的<code>Promise</code>数据(数据库运算完成的新闻数据，包含(content、latitude、longitude))</li>
+</ul>
+</li>
+<li><p>函数<code>reqCallback()</code>等待<code>newsGet()</code>期约完成，</p>
+<ul>
+<li><code>resolve </code>  <code>newsGet()</code>期约返回的<code>Promise</code>数据(数据库运算完成的新闻数据，包含(content、latitude、longitude))</li>
+</ul>
+</li>
+<li><p>函数<code>newsGet()</code>等待<code>sqliteDBNews.queryData()</code>期约完成，</p>
+<ul>
+<li><code>resolve </code>  <code>sqliteDBNews.queryData()</code>期约返回的<code>Promise</code>数据(数据库运算完成的新闻数据，包含(content、latitude、longitude))</li>
+</ul>
+<p><strong>核心：将数据库返回的数据一层一层传上去，但是由于异步，处理需要时间，所以用Promise一层一层返回</strong></p>
+</li>
+</ol>
+<h5 id="6-前端代码"><a href="#6-前端代码" class="headerlink" title="6.前端代码"></a>6.前端代码</h5><ul>
+<li><p>用<code>angular-cli</code>生成的，很简单</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--app.component.html--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;map&quot;</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* app.component.css */</span><br><span class="hljs-selector-id">#map</span> &#123;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>    <span class="hljs-attribute">position</span>: absolute;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">//app.Component.ts</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;<br><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> L <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;leaflet&#x27;</span>;<br><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;axios&#x27;</span><br><br><span class="hljs-meta">@Component</span>(&#123;<br>  <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;app-root&#x27;</span>,<br>  <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">&#x27;./app.component.html&#x27;</span>,<br>  <span class="hljs-attr">styleUrls</span>: [<span class="hljs-string">&#x27;./app.component.css&#x27;</span>]<br>&#125;)<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppComponent</span> &#123;<br>  title = <span class="hljs-string">&#x27;mapNews&#x27;</span>;<br>  <span class="hljs-attr">map</span>: <span class="hljs-built_in">any</span>;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>  &#125;<br>  <br>  <span class="hljs-title function_">ngOnInit</span>(): <span class="hljs-built_in">void</span> &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">initMap</span>()<br>  &#125;<br><br>  <span class="hljs-keyword">async</span> <span class="hljs-title function_">initMap</span>(): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">any</span>&gt; &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span> = L.<span class="hljs-title function_">map</span>(<span class="hljs-string">&#x27;map&#x27;</span>, &#123;<br>      <span class="hljs-attr">zoom</span>: <span class="hljs-number">7</span>,<br>      <span class="hljs-attr">center</span>: [<span class="hljs-number">32.10296</span>, <span class="hljs-number">118.91125</span>]<br>    &#125;);<br><br>    <span class="hljs-comment">// 添加图层到地图上</span><br>    <span class="hljs-keyword">let</span> tile = L.<span class="hljs-title function_">tileLayer</span>(<span class="hljs-string">&#x27;http://wprd04.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;style=7&amp;x=&#123;x&#125;&amp;y=&#123;y&#125;&amp;z=&#123;z&#125;&#x27;</span>, &#123;<br>      <span class="hljs-attr">maxZoom</span>: <span class="hljs-number">18</span>,<br>    &#125;);<br>    tile.<span class="hljs-title function_">addTo</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>);<br>    <span class="hljs-comment">//等待拿到数据</span><br>    <span class="hljs-keyword">let</span> temp = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">reqNewsData</span>();<br>    <span class="hljs-keyword">let</span> newsPos = temp.<span class="hljs-property">data</span>;<br>    <span class="hljs-keyword">var</span> newsLon = <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">var</span> newsLat = <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">var</span> newsContent = <span class="hljs-literal">null</span>;<br>		<span class="hljs-comment">//将拿到的经纬度，作为点坐标加载，Content作为bindPipup()提示参数加载</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; newsPos.<span class="hljs-property">length</span>; i++) &#123;<br>      newsLon = newsPos[i].<span class="hljs-property">lon</span>;<br>      newsLat = newsPos[i].<span class="hljs-property">lat</span>;<br>      newsContent = newsPos[i].<span class="hljs-property">content</span>;<br>      L.<span class="hljs-title function_">marker</span>([newsLat, newsLon]).<span class="hljs-title function_">addTo</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">map</span>).<span class="hljs-title function_">bindPopup</span>(newsContent)<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-comment">//向后端发送请求</span><br>  <span class="hljs-title function_">reqNewsData</span>(): <span class="hljs-built_in">any</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>      axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;http://localhost:8082/server&#x27;</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;<br>        <span class="hljs-title function_">resolve</span>(res)<br>      &#125;)<br>    &#125;)<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-实现效果"><a href="#3-实现效果" class="headerlink" title="3.实现效果"></a>3.实现效果</h4><p><img src="/img/mapNews1.png" srcset="/img/loading.gif" lazyload alt="mapNewsIMG1"></p>
+<p><img src="/img/mapNews2.png" srcset="/img/loading.gif" lazyload alt="mapNewsIMG2"></p>
+<p><img src="/img/mapNews3.png" srcset="/img/loading.gif" lazyload alt="mapNewsIMG3"></p>
+<p><img src="/img/mapNews4.png" srcset="/img/loading.gif" lazyload alt="mapNewsIMG4"></p>
+<p><img src="/img/mapNews5.png" srcset="/img/loading.gif" lazyload alt="数据库服务(部分)"></p>
+<h4 id="4-目前的不足"><a href="#4-目前的不足" class="headerlink" title="4. 目前的不足"></a>4. 目前的不足</h4><ol>
+<li>爬取到的新闻本身是没有坐标的，本项目在数据库中根据正文内容实现了城市坐标匹配<ul>
+<li>匹配的精度、速度取决于所使用的数据库</li>
+<li>当一个新闻中有多个地点、或者有类地名的名词时也会匹配到“错误”的城市坐标</li>
+<li>解决方法<ul>
+<li>更改数据库中城市数据组织方式</li>
+<li>优化数据库中匹配（查询）方法，对正文中的城市进行更高规格的检索</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>前后端通信的时候，有时候数据传输速度很快，有的时候很慢，有的时候后端甚至自己报错停掉了<ul>
+<li>可能取决于当时的网络情况</li>
+<li>后端是用<code>Nodejs</code>写的，存在异步情况。数据处理（存、匹配、取）时间过长导致响应时间过长</li>
+</ul>
+</li>
+<li>其他 遇到问题再说吧，纯粹突发奇想</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Projects/" class="category-chain-item">Projects</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/WebGIS/">#WebGIS</a>
+      
+        <a href="/tags/Angular/">#Angular</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>mapNews项目</div>
+      <div>https://anonymouslosty.github.io/2022/09/16/mapNews/mapNews/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ling yi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月16日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/21/Typescript%E7%AC%94%E8%AE%B0/Typescript%E7%AC%94%E8%AE%B0/" title="Typescript笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Typescript笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/08/ES6%E7%AC%94%E8%AE%B0/ES6%E7%AC%94%E8%AE%B0/" title="ES6笔记">
+                        <span class="hidden-mobile">ES6笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
