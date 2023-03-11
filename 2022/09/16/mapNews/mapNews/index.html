@@ -318,9 +318,8 @@
 <li>具有可视化地图功能，利用<code>leafletJS</code>实现</li>
 <li>后端自动爬取<a href="www.chinanews.com">中国新闻网</a>内容，并将相关数据存储到数据库<code>News.db</code>中<ul>
 <li>标题、内容、发布时间</li>
-<li>网页链接、内容摘要、编码格式、爬取时间</li>
+<li>网页链接、内容摘要、编码格式、爬取时间    </li>
 </ul>
-<p>	</p>
 </li>
 <li>（提前）建立<code>Position.db</code>数据库，存储地名以及坐标（经纬度）</li>
 <li><code>New.db</code>中新闻内容<code>News.content</code>与<code>Position.db</code>中地名<code>Position.city</code>模糊匹配得到新闻经纬度</li>
@@ -377,7 +376,7 @@
 <ul>
 <li><code>resolve </code>  <code>sqliteDBNews.queryData()</code>期约返回的<code>Promise</code>数据(数据库运算完成的新闻数据，包含(content、latitude、longitude))</li>
 </ul>
-<p><strong>核心：将数据库返回的数据一层一层传上去，但是由于异步，处理需要时间，所以用Promise一层一层返回</strong></p>
+<p><strong>核心：将数据库返回的数据一层一层传上去，但是由于异步，处理需要时间，所以用Promise一层一层返回</strong>     </p>
 </li>
 </ol>
 <h5 id="6-前端代码"><a href="#6-前端代码" class="headerlink" title="6.前端代码"></a>6.前端代码</h5><ul>
@@ -406,7 +405,7 @@
 </li>
 <li>前后端通信的时候，有时候数据传输速度很快，有的时候很慢，有的时候后端甚至自己报错停掉了<ul>
 <li>可能取决于当时的网络情况</li>
-<li>后端是用<code>Nodejs</code>写的，存在异步情况。数据处理（存、匹配、取）时间过长导致响应时间过长</li>
+<li> 后端是用<code>Nodejs</code>写的，存在异步情况。数据处理（存、匹配、取）时间过长导致响应时间过长</li>
 </ul>
 </li>
 <li>其他 遇到问题再说吧，纯粹突发奇想</li>

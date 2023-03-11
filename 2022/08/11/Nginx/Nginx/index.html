@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          947 字
+          922 字
         
       </span>
     
@@ -298,7 +298,7 @@
 <h3 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh">//注意路径问题<br>启动<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx</span><br>停止/重启<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -s stop(quit、reload)</span><br>命令帮助<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -h</span><br>验证配置文件<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -t</span><br>配置文件<br>[root@localhost ~]<span class="hljs-comment"># vim /usr/local/nginx/conf/nginx.conf</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="三、常见BUG"><a href="#三、常见BUG" class="headerlink" title="三、常见BUG"></a>三、常见BUG</h3><ol>
-<li><p>[emerg] open() “&#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;nginx.pid“ failed (13: Permission denied</p>
+<li><p>[emerg] open() “/usr/local/var/run/nginx.pid“ failed (13: Permission denied</p>
 <ul>
 <li><code>sudo nginx -c /usr/local/etc/nginx/nginx.conf. //你本地的nginx.config路径</code></li>
 </ul>

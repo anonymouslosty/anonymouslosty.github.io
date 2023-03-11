@@ -241,7 +241,7 @@
         
         
         
-          10 分钟
+          9 分钟
         
       </span>
     
@@ -343,11 +343,11 @@
 </li>
 <li><p>GeoServer安装</p>
 <ol>
-<li>Windows installer.exe文件安装 （不推荐）</li>
+<li> Windows installer.exe文件安装 （不推荐）</li>
 <li>通过war包导入TomCat安装（推荐）<ul>
 <li>将war包放入tomcat\webapp下</li>
-<li>运行bin&#x2F;startup.bat</li>
-<li>内部网址:localhost:端口号&#x2F;geoserver</li>
+<li>运行bin/startup.bat</li>
+<li>内部网址:localhost:端口号/geoserver</li>
 </ul>
 </li>
 </ol>
@@ -371,7 +371,7 @@
 <ul>
 <li><p>（方式一）修改CMD命令行的编码格式为UTF-8</p>
 </li>
-<li><p>（方式二）将tomcat控制台日志输出编码格式更改为GBK，修改tomcat根目录下conf&#x2F;logging.properties文件中的ConsoleHandler.encoding&#x3D;utf-8，这种方式能解决cmd控制台中文乱码，但<code>不建议使用</code>。</p>
+<li><p>（方式二）将tomcat控制台日志输出编码格式更改为GBK，修改tomcat根目录下conf/logging.properties文件中的ConsoleHandler.encoding=utf-8，这种方式能解决cmd控制台中文乱码，但<code>不建议使用</code>。</p>
 </li>
 <li><p><strong>因为更改了tomcat默认编码，如果我们使用idea启动tomcat，idea的默认编码不是GBK，就会同样产生idea控制台下tomcat乱码问题</strong></p>
 </li>
