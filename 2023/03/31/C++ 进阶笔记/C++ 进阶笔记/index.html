@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://anonymouslosty.github.io/img/%E6%B5%85%E5%B1%82%E5%A4%8D%E5%88%B6.png">
 <meta property="og:image" content="https://anonymouslosty.github.io/img/%E6%B7%B1%E5%B1%82%E5%A4%8D%E5%88%B6.png">
 <meta property="article:published_time" content="2023-03-31T11:07:08.000Z">
-<meta property="article:modified_time" content="2023-04-03T09:10:06.819Z">
+<meta property="article:modified_time" content="2023-04-03T11:13:27.063Z">
 <meta property="article:author" content="Ling yi">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          27k 字
+          28k 字
         
       </span>
     
@@ -239,7 +239,7 @@
         
         
         
-          223 分钟
+          230 分钟
         
       </span>
     
@@ -471,6 +471,13 @@
 <h6 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h6><p>​    每一次对成员函数的调用都存在一个目的对象，<code>this</code>指针就是指向这个目的对象的指针。<code>this</code>指针明确指出了成员函数当前所操作的数据所属的对象。</p>
 <p>​    <code>this</code>指针实际上是<strong>类成员函数的一个隐含形式参数</strong>。当通过一个对象调用成员函数的时候，系统先将该对象的地址通过该参数传递给成员函数，成员函数对对象的数据成员进行操作时，就隐含使用了<code>this</code>指针。</p>
 <p>​    <code>this</code>是一个指针常量，对于常成员函数，<code>this</code>同时又是一个指向常量的指针。在成员函数中，可以使用<code>*this</code>来标识正在调用该函数的对象。</p>
+<h6 id="重要的辨析"><a href="#重要的辨析" class="headerlink" title="重要的辨析"></a>重要的辨析</h6><p>​    成员函数通过this这个额外的<strong>隐式参数</strong>来访问调用它的对象。<strong>当我们调用成员函数时，会用对象的地址来初始化this指针（对象就是调用成员函数的对象）</strong>。这样我们在成员函数里就可以拿到对象的私有变量了。</p>
+<p>​    <code>this</code>形参是隐式定义的，不会显式地出现在成员函数形参列表里，但实际是存在的，所以任何自定义为this的参数或变量都是非法的。<br>​    因为<code>this</code>指针<strong>总是指向这个对象</strong>，所以this是一个**常量指针(指针的值是<code>const</code>的)**，不允许修改<code>this</code>指针的值。<code>this</code>指针的默认初始化过程等价<code>TestClass* const this = &amp;tc</code>。</p>
+<p>​    <strong>C++规定只能使用指向常量的指针来存放常量对象的地址</strong>,如果<code>tc</code>是个<strong>常量对象</strong>，那么<code>this</code>的默认初始化就是非法的，<strong>参数列表</strong>后的<code>const</code>作用是用来<strong>修改隐式this指针的类型</strong>，把它变成<strong>常指针常量</strong>。可以理解为<code>const</code>对象只能调用<code>const</code>方法？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestClass</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">TestClass</span>() : <span class="hljs-built_in">val</span>(<span class="hljs-number">100</span>) &#123;&#125;<br>    <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">TestClass</span>() &#123;&#125;<br><br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getVal_v1</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> val;<br>     	<span class="hljs-comment">//等价于 return this-&gt;val;   </span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getVal_v2</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> val;<br>    &#125;<br><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-type">int</span> val;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">//TestClass *const this = &amp;tc</span><br>    <span class="hljs-type">const</span> TestClass tc;<br>	<span class="hljs-comment">//报错</span><br>    <span class="hljs-type">int</span> a = tc.<span class="hljs-built_in">getVal_v1</span>();<br>    <span class="hljs-comment">//正常</span><br>    <span class="hljs-type">int</span> b = tc.<span class="hljs-built_in">getVal_v2</span>();<br><br>	cout &lt;&lt; <span class="hljs-string">&quot;getVal_v1: &quot;</span> &lt;&lt; a &lt;&lt; endl;<br>	cout &lt;&lt; <span class="hljs-string">&quot;getVal_v2: &quot;</span> &lt;&lt; b &lt;&lt; endl;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
 <h4 id="指向类的非静态成员的指针"><a href="#指向类的非静态成员的指针" class="headerlink" title="指向类的非静态成员的指针"></a>指向类的非静态成员的指针</h4><p>​    f类的成员自身也是一些变量、函数或者对象等。因此也可以将它们的地址存放到一个指针变量中。这样，可以通过指针直接指向对象的成员，进而可以通过这些指针访问对象的成员。</p>
 <p>​    指向对象的指针使用前<strong>先声明、再赋值、然后引用。</strong></p>
 <h5 id="声明-2"><a href="#声明-2" class="headerlink" title="声明"></a>声明</h5><p>​    <strong>类型说明符 类名::* 指针名;</strong>   声明指向数据成员的指针</p>
