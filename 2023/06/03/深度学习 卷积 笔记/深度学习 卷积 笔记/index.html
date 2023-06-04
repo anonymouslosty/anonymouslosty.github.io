@@ -18,25 +18,27 @@
   <meta name="author" content="Ling yi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、从TomCat启动服务">
+    <meta name="description" content="教程 https:&#x2F;&#x2F;zh-v2.d2l.ai&#x2F;chapter_preface&#x2F;index.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Geoserver（二 入门）">
-<meta property="og:url" content="https://anonymouslosty.github.io/2022/07/05/Geoserver2/GeoServer2/index.html">
+<meta property="og:title" content="深度学习 卷积 笔记">
+<meta property="og:url" content="https://anonymouslosty.github.io/2023/06/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20%E5%8D%B7%E7%A7%AF%20%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20%E5%8D%B7%E7%A7%AF%20%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="anonymouslosty的Blog">
-<meta property="og:description" content="一、从TomCat启动服务">
+<meta property="og:description" content="教程 https:&#x2F;&#x2F;zh-v2.d2l.ai&#x2F;chapter_preface&#x2F;index.html">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-05T04:55:29.000Z">
-<meta property="article:modified_time" content="2022-09-21T14:03:22.000Z">
+<meta property="og:image" content="e:\Self\blog\themes\fluid\source\img\%E5%8D%B7%E7%A7%AFEG1.png">
+<meta property="og:image" content="e:\Self\blog\themes\fluid\source\img\%E5%8D%B7%E7%A7%AF%E5%A1%AB%E5%85%85.png">
+<meta property="article:published_time" content="2023-06-03T05:10:44.000Z">
+<meta property="article:modified_time" content="2023-06-04T08:01:50.502Z">
 <meta property="article:author" content="Ling yi">
-<meta property="article:tag" content="GeoServer">
-<meta property="article:tag" content="WebGIS">
+<meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="e:\Self\blog\themes\fluid\source\img\%E5%8D%B7%E7%A7%AFEG1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Geoserver（二 入门） - anonymouslosty的Blog</title>
+  <title>深度学习 卷积 笔记 - anonymouslosty的Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Geoserver（二 入门）"></span>
+            <span id="subtitle" data-typed-text="深度学习 卷积 笔记"></span>
           
         </div>
 
@@ -217,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-05 12:55" pubdate>
-          2022年7月5日 下午
+        <time datetime="2023-06-03 13:10" pubdate>
+          2023年6月3日 下午
         </time>
       </span>
     
@@ -229,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          92 字
+          1.7k 字
         
       </span>
     
@@ -240,7 +242,7 @@
         
         
         
-          1 分钟
+          14 分钟
         
       </span>
     
@@ -293,12 +295,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Geoserver（二 入门）</h1>
+            <h1 style="display: none">深度学习 卷积 笔记</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月21日 晚上
+                    本文最后更新于：2023年6月4日 下午
                   
                 
               </p>
@@ -306,13 +308,63 @@
             
               <div class="markdown-body">
                 
-                <h3 id="一、从TomCat启动服务"><a href="#一、从TomCat启动服务" class="headerlink" title="一、从TomCat启动服务"></a>一、从TomCat启动服务</h3><span id="more"></span>
+                <h4 id="一些理解"><a href="#一些理解" class="headerlink" title="一些理解"></a>一些理解</h4><p>用神经网络去学习构建卷积核</p>
+<p>卷积层将输入和核矩阵进行交叉相关，加上偏移之后得到输出。</p>
+<p>核矩阵和偏移是可学习的参数</p>
+<p>核矩阵的大小是超参数(在训练前就已经定义好)</p>
+<h5 id="二维交叉与二维卷积"><a href="#二维交叉与二维卷积" class="headerlink" title="二维交叉与二维卷积"></a>二维交叉与二维卷积</h5><p>没有本质的区别，</p>
+<p>$y_{i,j}=\sum_{a=1}^{h}\sum_{b=1}^{w}w_{a,b}x_{i+a,j+b}$</p>
+<p><strong>索引前多了负号，因为<code>w</code>是学习的值，所以没有本质区别</strong></p>
+<p>$y_{i,j}=\sum_{a=1}^{h}\sum_{b=1}^{w}w_{-a,-b}x_{i+a,j+b}$</p>
+<h5 id="不同的维度"><a href="#不同的维度" class="headerlink" title="不同的维度"></a>不同的维度</h5><ul>
+<li><p>一维</p>
+<p>$y_i=\sum_{a=1}^hw_ax_{i+a}$</p>
+<p>处理文本、语言、时间序列</p>
+</li>
+<li><p>三维</p>
+<p>$y_{i,j,k}=\sum_{a=1}^h\sum_{b=1}^w\sum_{c=1}^d$</p>
+</li>
+</ul>
+<h4 id="实现二维卷积层"><a href="#实现二维卷积层" class="headerlink" title="实现二维卷积层"></a>实现二维卷积层</h4><h5 id="互相关运算"><a href="#互相关运算" class="headerlink" title="互相关运算"></a>互相关运算</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">corr2d</span>(<span class="hljs-params">X,K</span>):<br>    h,w = K.shape<br>    Y = torch.zeros((X.shape[<span class="hljs-number">0</span>]-h+<span class="hljs-number">1</span>,X.shape[<span class="hljs-number">1</span>]-w+<span class="hljs-number">1</span>))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Y.shape[<span class="hljs-number">0</span>]):<br>    	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (Y.shape[<span class="hljs-number">1</span>]):<br>            Y[i,j]=(X[i:i+h,j:j+w]*K).<span class="hljs-built_in">sum</span>()<br>    <span class="hljs-keyword">return</span> Y<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C">D:\\geo\\tomcat8\\bin <span class="hljs-comment">//文件夹</span><br>cmd<br>startup<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Conv2D</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,kernel_size</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        self.weight = nn.Parameter(torch.rand(kernel_size))<br>        self.bias == nn.Parameter(torch.zeros(<span class="hljs-number">1</span>))<br>   	<span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self,X</span>):<br>        <span class="hljs-keyword">return</span> corr2d(x,self.weight) + self.bias<br></code></pre></td></tr></table></figure>
 
-<h5 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">UserName: admin<br>PassWord: geoserver<br></code></pre></td></tr></table></figure>
 
-<h3 id="二、界面"><a href="#二、界面" class="headerlink" title="二、界面"></a>二、界面</h3>
+
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><p><img src="E:\Self\blog\themes\fluid\source\img\卷积EG1.png" srcset="/img/loading.gif" lazyload alt="求卷积核说明图"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><br>conv2d = nn.Conv2d(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,kernel_size=(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>),bias=<span class="hljs-literal">False</span>)<br><br><span class="hljs-comment"># 第一个张量矩阵</span><br>X = torch.ones((<span class="hljs-number">6</span>, <span class="hljs-number">8</span>))<br>X[:, <span class="hljs-number">2</span>:<span class="hljs-number">6</span>] = <span class="hljs-number">0</span><br>X = X.reshape((<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>))<br><span class="hljs-comment"># 第二个张量矩阵</span><br>Y = torch.zeros((<span class="hljs-number">6</span>,<span class="hljs-number">7</span>))<br>Y[:,<span class="hljs-number">1</span>] = <span class="hljs-number">1</span><br>Y[:,-<span class="hljs-number">2</span>]= -<span class="hljs-number">1</span><br>Y = Y.reshape((<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>))<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100</span>):<br>    Y_hat = conv2d(X)<br>    l = (Y_hat - Y) ** <span class="hljs-number">2</span><br>    conv2d.zero_grad()<br>    l.<span class="hljs-built_in">sum</span>().backward()<br>    <span class="hljs-comment"># 迭代卷积核</span><br>    conv2d.weight.data[:] -= <span class="hljs-number">3e-2</span> * conv2d.weight.grad<br>    <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span>) % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;epoch <span class="hljs-subst">&#123;i+<span class="hljs-number">1</span>&#125;</span>, loss <span class="hljs-subst">&#123;l.<span class="hljs-built_in">sum</span>():<span class="hljs-number">.3</span>f&#125;</span>&#x27;</span>)<br><br><span class="hljs-built_in">print</span>(conv2d.weight.data.reshape((<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)))<br><span class="hljs-comment">#tensor([[ 1.0000, -1.0000]])</span><br><span class="hljs-comment">#表示 中间问号里的卷积核为[1,-1] 能够使得X卷积计算为Y</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="填充和步幅"><a href="#填充和步幅" class="headerlink" title="填充和步幅"></a>填充和步幅</h5><h6 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h6><p>每次使用卷积核都能减小输出的大小</p>
+<ul>
+<li><code>input</code> :<code>32x32</code> <code>kernel_size</code>:<code>5x5</code><ul>
+<li>根据<code>kernel_size</code>  每卷积一次，减少<code>4x4</code> </li>
+<li>第一次卷积 <code>32x32</code> :arrow_right:<code>28x28</code></li>
+<li>…</li>
+<li>第七次卷积结果 <code>4x4</code></li>
+</ul>
+</li>
+<li>总结：每卷积一次，形状从$n_h \times n_w$减小到$(n_w-k_h+1)\times(n_w-k_w+1)$<ul>
+<li>其中<code>k_h</code>为卷积核的高，<code>k_w</code>为卷积核的宽</li>
+</ul>
+</li>
+</ul>
+<h6 id="方法一：填充"><a href="#方法一：填充" class="headerlink" title="方法一：填充"></a>方法一：填充</h6><p><img src="E:\Self\blog\themes\fluid\source\img\卷积填充.png" srcset="/img/loading.gif" lazyload alt="卷积填充"></p>
+<p><strong>在输入数据的四周进行数据填充</strong>。</p>
+<ul>
+<li>在上下左右分别添加0<ul>
+<li>输出形状为$(n_h-k_h+p_h+1) \times(n_w-k_w+p_w+1)$</li>
+<li>通常取 $p_h=k_h-1$,$p_w=k_w-1$<ul>
+<li><code>k</code>为奇数，在上下两侧填充$p_h/2$</li>
+<li><code>k</code>为偶数，在上侧填充$[p_h/2]$，在下侧填充$[p_h/2]$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="方法二：步幅"><a href="#方法二：步幅" class="headerlink" title="方法二：步幅"></a>方法二：步幅</h6><p><strong>控制卷积核移动的幅度，可以每次不止移动一格。</strong></p>
+
                 
               </div>
             
@@ -330,7 +382,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Prerequisites/" class="category-chain-item">Prerequisites</a>
+  <a href="/categories/Notes/" class="category-chain-item">Notes</a>
   
   
 
@@ -345,9 +397,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/GeoServer/">#GeoServer</a>
-      
-        <a href="/tags/WebGIS/">#WebGIS</a>
+        <a href="/tags/DeepLearning/">#DeepLearning</a>
       
     </div>
   
@@ -359,8 +409,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Geoserver（二 入门）</div>
-      <div>https://anonymouslosty.github.io/2022/07/05/Geoserver2/GeoServer2/</div>
+      <div>深度学习 卷积 笔记</div>
+      <div>https://anonymouslosty.github.io/2023/06/03/深度学习 卷积 笔记/深度学习 卷积 笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -372,13 +422,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月5日</div>
+          <div>2023年6月3日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月21日</div>
+          <div>2023年6月4日</div>
         </div>
       
       <div class="license-meta-item">
@@ -407,18 +457,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/05/Geoserver3/Geoserver3/" title="Geoserver（三 发布与服务）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Geoserver（三 发布与服务）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/05/Geoserver/Geoserver/" title="Geoserver（一 安装）">
-                        <span class="hidden-mobile">Geoserver（一 安装）</span>
+                      <a href="/2023/06/02/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%20%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%20%E7%AC%94%E8%AE%B0/" title="深度学习 神经网络基础 笔记">
+                        <span class="hidden-mobile">深度学习 神经网络基础 笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
