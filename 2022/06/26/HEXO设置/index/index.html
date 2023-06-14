@@ -194,7 +194,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/band.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/band_deer.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          502 字
+          504 字
         
       </span>
     
@@ -305,21 +305,22 @@
             
               <div class="markdown-body">
                 
-                <h4 id="1-背景设置"><a href="#1-背景设置" class="headerlink" title="1.背景设置"></a>1.背景设置</h4><span id="more"></span>
+                <h4 id="背景设置">1.背景设置</h4>
+<span id="more"></span>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">https:<span class="hljs-comment">//blog.csdn.net/weixin_43828250/article/details/114379300</span><br></code></pre></td></tr></table></figure>
-
-<h4 id="2-图片插入的包"><a href="#2-图片插入的包" class="headerlink" title="2.图片插入的包"></a>2.图片插入的包</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">npm install hexo-image-link --save<br>npm uninstall hexo-renderer-marker --save  #卸载 marked<br>npm install hexo-renderer-markdown-it --save  #安装markdown-it<br>https:<span class="hljs-comment">//blog.csdn.net/rentonhe/article/details/123666769</span><br></code></pre></td></tr></table></figure>
-<p>或者直接使用 </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C">&#123;% asset_img example.png This is an example image %&#125; <br></code></pre></td></tr></table></figure>
+<h4 id="图片插入的包">2.图片插入的包</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">npm install hexo-image-link --save<br>npm uninstall hexo-renderer-marker --save  #卸载 marked<br>npm install hexo-renderer-markdown-it --save  #安装markdown-it<br>https:<span class="hljs-comment">//blog.csdn.net/rentonhe/article/details/123666769</span><br></code></pre></td></tr></table></figure>
+<p>或者直接使用 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C">&#123;% asset_img example.png This is an example image %&#125; <br></code></pre></td></tr></table></figure> + example.jpg放在同目录下同名资源文件夹中
++ 见<a
+target="_blank" rel="noopener" href="https://www.freesion.com/article/9410594097/">HEXO基本操作</a>
+<!--more--></p>
+<h4 id="设置paddingmargin等">3.设置Padding、Margin等</h4>
 <ul>
-<li>example.jpg放在同目录下同名资源文件夹中</li>
-<li>见<a target="_blank" rel="noopener" href="https://www.freesion.com/article/9410594097/">HEXO基本操作</a><!--more--></li>
-</ul>
-<h4 id="3-设置Padding、Margin等"><a href="#3-设置Padding、Margin等" class="headerlink" title="3.设置Padding、Margin等"></a>3.设置Padding、Margin等</h4><ul>
 <li>在浏览器中查看Layout和对应的代码块</li>
 <li>到CSS文件中找</li>
 </ul>
-<h4 id="4-关于本地端口占用"><a href="#4-关于本地端口占用" class="headerlink" title="4.关于本地端口占用"></a>4.关于本地端口占用</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">Error: listen EADDRINUSE: address already in use :::<span class="hljs-number">4000</span><br>sudo lsof -i:端口号<br>sudo kill <span class="hljs-number">-9</span> pid<br></code></pre></td></tr></table></figure>
+<h4 id="关于本地端口占用">4.关于本地端口占用</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">Error: listen EADDRINUSE: address already in use :::<span class="hljs-number">4000</span><br>sudo lsof -i:端口号<br>sudo kill <span class="hljs-number">-9</span> pid<br></code></pre></td></tr></table></figure>
 
                 
               </div>

@@ -195,7 +195,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/band.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/band_deer.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
@@ -306,25 +306,24 @@
             
               <div class="markdown-body">
                 
-                <h4 id="1-Preface"><a href="#1-Preface" class="headerlink" title="1.Preface"></a>1.Preface</h4><ul>
-<li><p>Python之所以强大是因为能用（依赖）的库多罢了</p>
-</li>
+                <h4 id="preface">1.Preface</h4>
+<ul>
+<li><p>Python之所以强大是因为能用（依赖）的库多罢了</p></li>
 <li><p>但是较为繁琐的是环境的搭建、配置和维护</p>
 <ul>
 <li>使用初期 包、库的安装</li>
-<li>库的更新、Python版本的更新也会带来问题<ul>
+<li>库的更新、Python版本的更新也会带来问题
+<ul>
 <li>新版本库不支持老Python</li>
 <li>新版本Python不支持老库</li>
-</ul>
-</li>
-<li>语法规范？感觉像是双刃剑<ul>
+</ul></li>
+<li>语法规范？感觉像是双刃剑
+<ul>
 <li>写起来方便</li>
 <li>有时候理解需要一点时间反应</li>
-</ul>
-</li>
+</ul></li>
 <li>Python运行有时候还是比较慢的</li>
-</ul>
-</li>
+</ul></li>
 <li><p>可能优点是？</p>
 <ul>
 <li>在Win和Mac双系统切换的时候，都能正常使用</li>
@@ -332,53 +331,50 @@
 <li>有相同的安装环境就能跑</li>
 <li>网上可复用的代码块较多、案例较多</li>
 <li>弥补局限性，代码代替多次操作，Arcpy代替ModelBuilder</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="2-有关环境"><a href="#2-有关环境" class="headerlink" title="2.有关环境"></a>2.有关环境</h4><h5 id="1-使用工具"><a href="#1-使用工具" class="headerlink" title="1.使用工具"></a>1.使用工具</h5><ul>
+<h4 id="有关环境">2.有关环境</h4>
+<h5 id="使用工具">1.使用工具</h5>
+<ul>
 <li>Anacoda3 2022.5 MacOSX</li>
 <li>Spyder 5.1.5</li>
 <li>Python 3.8.13</li>
 </ul>
-<h5 id="2-配置流程"><a href="#2-配置流程" class="headerlink" title="2.配置流程"></a>2.配置流程</h5><ul>
-<li><p>安装Anaconda <a target="_blank" rel="noopener" href="https://www.anaconda.com/">官网下载</a></p>
-</li>
-<li><p>Environments中配置自己的编程环境  OSGIS</p>
+<h5 id="配置流程">2.配置流程</h5>
+<ul>
+<li><p>安装Anaconda <a
+target="_blank" rel="noopener" href="https://www.anaconda.com/">官网下载</a></p></li>
+<li><p>Environments中配置自己的编程环境 OSGIS</p>
 <ul>
 <li>Create 创建环境</li>
 <li>Import 导入环境</li>
 <li>Backup 备份环境</li>
-</ul>
-</li>
+</ul></li>
 <li><p>安装库</p>
 <ul>
-<li><p>方法1: 环境下利用终端  conda install 或者 pip install </p>
+<li><p>方法1: 环境下利用终端 conda install 或者 pip install</p>
 <ul>
-<li>优点 直接 </li>
+<li>优点 直接</li>
 <li>缺点 非可视化</li>
-</ul>
-</li>
+</ul></li>
 <li><p>方法2: 更新Channels 从 conda Channels中导入</p>
 <ul>
 <li><p>问题:文件夹写入权限问题</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C">NotWritableError: The current user does not have write permissions to a required path.<br></code></pre></td></tr></table></figure>
-
 <p>解决方法：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C">cd /users/o1/opt   <span class="hljs-comment">//操作opt文件夹下的anaconda3</span><br>sū<span class="hljs-keyword">do</span> chown -R o1 anaconda3 <span class="hljs-comment">//赋予权限</span><br></code></pre></td></tr></table></figure></li>
 <li><p>更新具体Channels</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C">conda config --get channels <span class="hljs-comment">//获取当前环境OSGIS下Channels</span><br>conda config --add channels conda-forge <span class="hljs-comment">//有强大的社区支持，提供了大多数安装包，并且更新及时</span><br>conda config --remove-key channels <span class="hljs-comment">//删除Channel</span><br>conda config --add channels https:<span class="hljs-comment">//mirrors.ustc.edu.cn/anaconda/pkgs/main/</span><br>conda config --add channels https:<span class="hljs-comment">//mirrors.ustc.edu.cn/anaconda/pkgs/free/</span><br>conda config --add channels https:<span class="hljs-comment">//mirrors.bfsu.edu.cn/anaconda/cloud/pytorch/</span><br>pip config <span class="hljs-built_in">set</span> global.index-url https:<span class="hljs-comment">//mirrors.ustc.edu.cn/pypi/web/simple</span><br>conda config --<span class="hljs-built_in">set</span> show_channel_urls yes<br><span class="hljs-meta"># activate my environment</span><br>conda activate OSGIS<br><span class="hljs-meta"># update all packages <span class="hljs-keyword">if</span> needed</span><br>conda update --all<br><span class="hljs-meta"># set channel priority as strict 设置优先级</span><br>conda config --<span class="hljs-built_in">set</span> channel_priority strict<br></code></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>常见的库 </p>
+</ul></li>
+<li><p>常见的库</p>
 <ul>
 <li>numpy</li>
 <li>GDAL</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-基本流程"><a href="#3-基本流程" class="headerlink" title="3. 基本流程"></a>3. 基本流程</h4><p>读取、处理、写入(更新)</p>
+<h4 id="基本流程">3. 基本流程</h4>
+<p>读取、处理、写入(更新)</p>
 
                 
               </div>

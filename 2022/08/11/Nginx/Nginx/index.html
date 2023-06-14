@@ -194,7 +194,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/band.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/band_deer.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
@@ -305,34 +305,38 @@
             
               <div class="markdown-body">
                 
-                <h3 id="一、Nginx介绍"><a href="#一、Nginx介绍" class="headerlink" title="一、Nginx介绍"></a>一、Nginx介绍</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34943332">深入浅出Nginx</a></p>
-<p>Nginx是lgor Sysoev为俄罗斯访问量第二的rambler.ru站点设计开发的。从2004年发布至今，凭借开源的力量，已经接近成熟与完善。</p>
-<p>Nginx功能丰富，可作为HTTP服务器，也可作为反向代理服务器，邮件服务器。支持FastCGI、SSL、Virtual Host、URL Rewrite、Gzip等功能。并且支持很多第三方的模块扩展。</p>
-<h3 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh">//注意路径问题<br>启动<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx</span><br>停止/重启<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -s stop(quit、reload)</span><br>命令帮助<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -h</span><br>验证配置文件<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -t</span><br>配置文件<br>[root@localhost ~]<span class="hljs-comment"># vim /usr/local/nginx/conf/nginx.conf</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="三、常见BUG"><a href="#三、常见BUG" class="headerlink" title="三、常见BUG"></a>三、常见BUG</h3><ol>
-<li><p>[emerg] open() “/usr/local/var/run/nginx.pid“ failed (13: Permission denied</p>
+                <h3 id="一nginx介绍">一、Nginx介绍</h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34943332">深入浅出Nginx</a></p>
+<p>Nginx是lgor
+Sysoev为俄罗斯访问量第二的rambler.ru站点设计开发的。从2004年发布至今，凭借开源的力量，已经接近成熟与完善。</p>
+<p>Nginx功能丰富，可作为HTTP服务器，也可作为反向代理服务器，邮件服务器。支持FastCGI、SSL、Virtual
+Host、URL Rewrite、Gzip等功能。并且支持很多第三方的模块扩展。</p>
+<h3 id="二常用操作">二、常用操作</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh">//注意路径问题<br>启动<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx</span><br>停止/重启<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -s stop(quit、reload)</span><br>命令帮助<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -h</span><br>验证配置文件<br>[root@localhost ~]<span class="hljs-comment"># /usr/local/nginx/sbin/nginx -t</span><br>配置文件<br>[root@localhost ~]<span class="hljs-comment"># vim /usr/local/nginx/conf/nginx.conf</span><br></code></pre></td></tr></table></figure>
+<h3 id="三常见bug">三、常见BUG</h3>
+<ol type="1">
+<li><p>[emerg] open() “/usr/local/var/run/nginx.pid“ failed (13:
+Permission denied</p>
 <ul>
 <li><code>sudo nginx -c /usr/local/etc/nginx/nginx.conf. //你本地的nginx.config路径</code></li>
-</ul>
-</li>
-<li><p>Nginx nginx: [emerg] bind() to 0.0.0.0:8083 failed (48: Address already in use)</p>
+</ul></li>
+<li><p>Nginx nginx: [emerg] bind() to 0.0.0.0:8083 failed (48: Address
+already in use)</p>
 <ul>
-<li><p><code>ps -ef|grep nginx</code> </p>
-</li>
-<li><p><code>sudo kill PID</code></p>
-</li>
-</ul>
-</li>
-<li><p>nginx: [alert] kill(21725, 1) failed (1: Operation not permitted)</p>
+<li><p><code>ps -ef|grep nginx</code></p></li>
+<li><p><code>sudo kill PID</code></p></li>
+</ul></li>
+<li><p>nginx: [alert] kill(21725, 1) failed (1: Operation not
+permitted)</p>
 <ul>
 <li><code>sudo nginx -s reload</code></li>
-</ul>
-</li>
+</ul></li>
 </ol>
-<h3 id="四、还没解决的问题"><a href="#四、还没解决的问题" class="headerlink" title="四、还没解决的问题"></a>四、还没解决的问题</h3><ol>
+<h3 id="四还没解决的问题">四、还没解决的问题</h3>
+<ol type="1">
 <li>之所以用Nginx是因为后面项目可能需要用到Nginx配置</li>
-<li>QGIS server  如何基于Nginx部署，很麻烦，目前国内的资料很少，特别是对于Mac系统来说</li>
+<li>QGIS server
+如何基于Nginx部署，很麻烦，目前国内的资料很少，特别是对于Mac系统来说</li>
 <li>不像Geoserver 直接拖入到tomcat的Webapp目录里面就行</li>
 </ol>
 

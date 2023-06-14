@@ -194,7 +194,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/band.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/band_deer.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
@@ -305,38 +305,46 @@
             
               <div class="markdown-body">
                 
-                <h5 id="0-Preface"><a href="#0-Preface" class="headerlink" title="0. Preface"></a>0. Preface</h5><p>整理一些杂七杂八的东西</p>
-<h5 id="1-推导式"><a href="#1-推导式" class="headerlink" title="1. 推导式"></a>1. 推导式</h5><ul>
+                <h5 id="preface">0. Preface</h5>
+<p>整理一些杂七杂八的东西</p>
+<h5 id="推导式">1. 推导式</h5>
+<ul>
 <li><p>能简化对数据进行筛选的语法</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">[表达式 <span class="hljs-keyword">for</span> 变量 <span class="hljs-keyword">in</span> 列表] <br>[out_exp_res <span class="hljs-keyword">for</span> out_exp <span class="hljs-keyword">in</span> input_list]<br><br><span class="hljs-comment">#或者 </span><br><br>[表达式 <span class="hljs-keyword">for</span> 变量 <span class="hljs-keyword">in</span> 列表 <span class="hljs-keyword">if</span> 条件]<br>[out_exp_res <span class="hljs-keyword">for</span> out_exp <span class="hljs-keyword">in</span> input_list <span class="hljs-keyword">if</span> condition]<br><br>[结果值<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> 条件 <span class="hljs-keyword">else</span> 结果<span class="hljs-number">2</span>  <span class="hljs-keyword">for</span> 变量名 <span class="hljs-keyword">in</span> 列表]<br>[out_exp_res1 <span class="hljs-keyword">if</span> 条件 <span class="hljs-keyword">else</span> out_exp_res2 <span class="hljs-keyword">for</span> 变量 <span class="hljs-keyword">in</span> 列表 ]<br><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="2-列表、元组、字典、集合"><a href="#2-列表、元组、字典、集合" class="headerlink" title="2. 列表、元组、字典、集合"></a>2. 列表、元组、字典、集合</h5><ul>
+<h5 id="列表元组字典集合">2. 列表、元组、字典、集合</h5>
+<ul>
 <li><p>列表,常用方法都行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">list</span> = [<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-number">3</span>,<span class="hljs-literal">False</span>]<br></code></pre></td></tr></table></figure></li>
 <li><p>元组，和列表类似，组内元素不能更改（初始化的时候指定了一片内存）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">tuple</span>=(<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-number">3</span>,<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure></li>
 <li><p>字典，对象，键值对</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python">d=&#123;<span class="hljs-string">&#x27;Name&#x27;</span>:<span class="hljs-string">&#x27;zly&#x27;</span>,<span class="hljs-string">&#x27;key&#x27;</span>:<span class="hljs-string">&#x27;value&#x27;</span>&#125;<br><br><br>dict0 = <span class="hljs-built_in">dict</span>()  <span class="hljs-comment"># 1、传一个空字典</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;dict0:&#x27;</span>, dict0)<br> <br>dict1 = <span class="hljs-built_in">dict</span>(&#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;li&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">24</span>&#125;)  <span class="hljs-comment"># 2、传一个字典</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;dict1:&#x27;</span>, dict1)<br> <br>dict2 = <span class="hljs-built_in">dict</span>(user=<span class="hljs-string">&#x27;admin&#x27;</span>, password=<span class="hljs-number">123456</span>)  <span class="hljs-comment"># 3、传关键字</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;dict2:&#x27;</span>, dict2)<br> <br>dict3 = <span class="hljs-built_in">dict</span>([(<span class="hljs-string">&#x27;student&#x27;</span>, <span class="hljs-number">1</span>), (<span class="hljs-string">&#x27;teacher&#x27;</span>, <span class="hljs-number">2</span>)])  <span class="hljs-comment"># 4、传一个包含一个或多个元组的列表</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;dict3:&#x27;</span>, dict3)<br> <br>dict5 = <span class="hljs-built_in">dict</span>(<span class="hljs-built_in">zip</span>([<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;A&#x27;</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]))  <span class="hljs-comment"># 5、传一个zip()函数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;dict5:&#x27;</span>, dict5)<br><br><span class="hljs-comment"># 使用大括号或者dict()内建函数构造字典</span><br></code></pre></td></tr></table></figure></li>
-<li><p>集合 无序、不重复（自动去除重复值）</p>
-</li>
+<li><p>集合 无序、不重复（自动去除重复值）</p></li>
 <li><ul>
 <li>创建空集合不能用<code>&#123;&#125;</code>，要用<code>set()</code></li>
 <li>集合之间可以使用关系运算符进行运算</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">num=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&#125;<br><span class="hljs-built_in">print</span>(num)<br><span class="hljs-comment">#&#123;1,2,3,4&#125;</span><br><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="3-关于流程控制语句"><a href="#3-关于流程控制语句" class="headerlink" title="3.关于流程控制语句"></a>3.关于流程控制语句</h5><ul>
-<li><p><strong>break</strong> 语句可以跳出 for 和 while 的循环体。如果你从 for 或 while 循环中终止，任何对应的循环 else 块将不执行。</p>
+<h5 id="关于流程控制语句">3.关于流程控制语句</h5>
+<ul>
+<li><p><strong>break</strong> 语句可以跳出 for 和 while
+的循环体。如果你从 for 或 while 循环中终止，任何对应的循环 else
+块将不执行。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python">sites = [<span class="hljs-string">&quot;Baidu&quot;</span>, <span class="hljs-string">&quot;Google&quot;</span>,<span class="hljs-string">&quot;Runoob&quot;</span>,<span class="hljs-string">&quot;Taobao&quot;</span>,<span class="hljs-string">&#x27;12&#x27;</span>]<br><span class="hljs-keyword">for</span> site <span class="hljs-keyword">in</span> sites:<br>    <span class="hljs-keyword">if</span> site == <span class="hljs-string">&quot;Runoob&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;菜鸟教程!&quot;</span>)<br>        <span class="hljs-keyword">break</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;循环数据 &quot;</span> + site)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;没有循环数据!&quot;</span>)  <span class="hljs-comment">#break之后这里的else没有执行</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;完成循环!&quot;</span>)<br><br><span class="hljs-comment"># Baidu</span><br><span class="hljs-comment">#循环数据 Google</span><br><span class="hljs-comment">#菜鸟教程!</span><br><span class="hljs-comment">#完成循环!</span><br></code></pre></td></tr></table></figure></li>
-<li><p><strong>continue</strong> 语句被用来告诉 Python 跳过当前循环块中的剩余语句，然后继续进行下一轮循环。</p>
+<li><p><strong>continue</strong> 语句被用来告诉 Python
+跳过当前循环块中的剩余语句，然后继续进行下一轮循环。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python">sites = [<span class="hljs-string">&quot;Baidu&quot;</span>, <span class="hljs-string">&quot;Google&quot;</span>,<span class="hljs-string">&quot;Runoob&quot;</span>,<span class="hljs-string">&quot;Taobao&quot;</span>]<br><span class="hljs-keyword">for</span> site <span class="hljs-keyword">in</span> sites:<br>    <span class="hljs-keyword">if</span> site == <span class="hljs-string">&quot;Runoob&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;菜鸟教程!&quot;</span>)<br>        <span class="hljs-keyword">continue</span>  <span class="hljs-comment">#continue下面的没有执行</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;循环数据 &quot;</span> + site)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;没有循环数据!&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;完成循环!&quot;</span>)<br><br><span class="hljs-comment">#循环数据 Baidu</span><br><span class="hljs-comment">#循环数据 Google</span><br><span class="hljs-comment">#菜鸟教程!</span><br><span class="hljs-comment">#循环数据 Taobao</span><br><span class="hljs-comment">#没有循环数据!</span><br><span class="hljs-comment">#完成循环!</span><br></code></pre></td></tr></table></figure></li>
-<li><p>Python pass是空语句，是为了保持程序结构的完整性。pass 不做任何事情，一般用做占位语句，如下实例</p>
+<li><p>Python pass是空语句，是为了保持程序结构的完整性。pass
+不做任何事情，一般用做占位语句，如下实例</p>
 <ul>
 <li>没事做就用<code>pass</code>吧</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> letter <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;Runoob&#x27;</span>: <br>   <span class="hljs-keyword">if</span> letter == <span class="hljs-string">&#x27;o&#x27;</span>:<br>      <span class="hljs-keyword">pass</span><br>      <span class="hljs-built_in">print</span> (<span class="hljs-string">&#x27;执行 pass 块&#x27;</span>)<br>   <span class="hljs-built_in">print</span> (<span class="hljs-string">&#x27;当前字母 :&#x27;</span>, letter)<br> <br><span class="hljs-built_in">print</span> (<span class="hljs-string">&quot;Good bye!&quot;</span>)<br><br><span class="hljs-comment"># 当前字母 : R</span><br><span class="hljs-comment"># 当前字母 : u</span><br><span class="hljs-comment"># 当前字母 : n</span><br><span class="hljs-comment"># 执行 pass 块</span><br><span class="hljs-comment"># 当前字母 : o</span><br><span class="hljs-comment"># 执行 pass 块</span><br><span class="hljs-comment"># 当前字母 : o</span><br><span class="hljs-comment"># 当前字母 : b</span><br><span class="hljs-comment"># Good bye!</span><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="4-函数"><a href="#4-函数" class="headerlink" title="4.函数"></a>4.函数</h5><ul>
+<h5 id="函数">4.函数</h5>
+<ul>
 <li><p>感觉没什么好看的</p>
 <ul>
 <li><p>注意默认参数 <code>max(a,b=0)</code></p>
@@ -345,8 +353,7 @@
 <ul>
 <li>加了<code>*</code>号，参数以<strong>元组</strong>存入，存放所有未命名的变量参数</li>
 <li>加了两个<code>**</code>号，参数以<strong>字典</strong>的方式存入</li>
-</ul>
-</li>
+</ul></li>
 <li><p>声明的时候<code>*</code>可以单独出现</p>
 <ul>
 <li>单独出现的时候,<code>*</code>后面的参数必须使用关键字输入</li>
@@ -354,8 +361,7 @@
 <li>调用的时候，关键字参数必须为最后一个参数</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">fucntion</span>(<span class="hljs-params">i,j=<span class="hljs-number">1.1</span>,k=<span class="hljs-string">&#x27;hello&#x27;</span></span>)<br>	<span class="hljs-built_in">print</span>(i,j,j)<br>  <br>function(<span class="hljs-number">1</span>,k=<span class="hljs-string">&#x27;world&#x27;</span>)<br><span class="hljs-comment">#1 1.1 world  </span><br><span class="hljs-comment">#指定为参数k赋值，</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
                 

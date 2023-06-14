@@ -194,7 +194,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/band.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/band_deer.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
@@ -305,19 +305,28 @@
             
               <div class="markdown-body">
                 
-                <h1 id="C-进阶笔记3"><a href="#C-进阶笔记3" class="headerlink" title="C++进阶笔记3"></a>C++进阶笔记3</h1><h2 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>​        类的继承，是新的类从已有的类那里得到已有的特性。从已有类产生新的类的过程就叫派生。原有的类称为<strong>基类</strong>或者<strong>父类</strong>，产生的新类称为派生类或者子类。</p>
+                <h1 id="c进阶笔记3">C++进阶笔记3</h1>
+<h2 id="类的继承">类的继承</h2>
+<h3 id="定义">定义</h3>
+<p>​
+类的继承，是新的类从已有的类那里得到已有的特性。从已有类产生新的类的过程就叫派生。原有的类称为<strong>基类</strong>或者<strong>父类</strong>，产生的新类称为派生类或者子类。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> 派生类名:继承方式 基类名<span class="hljs-number">1</span>,继承方式 基类名<span class="hljs-number">2</span>,...,继承方式 基类名n<br>&#123;<br>    派生类成员声明;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p>​        一个派生类可以同时有多个基类(多继承),也可以只有一个基类(单继承)。直接派生出某类的基类称为直接基类，基类的基类甚至更高层的基类称为间接基类。</p>
-<p>​        <strong>继承方式</strong>规定了如何访问<strong>从基类继承的成员</strong>，指定了派生类成员以及类外对象对于从基类继承来的成员的访问权限。<strong>派生类成员</strong>是指除了基类继承来的所有成员外，新增加的数据和函数成员。不显式的给出继承方式，默认为私有继承(<code>private</code>)。</p>
-<h3 id="生成过程"><a href="#生成过程" class="headerlink" title="生成过程"></a>生成过程</h3><h4 id="吸收"><a href="#吸收" class="headerlink" title="吸收"></a>吸收</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CreditAccount</span>: <span class="hljs-keyword">public</span> Account&#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
-
+<p>​
+一个派生类可以同时有多个基类(多继承),也可以只有一个基类(单继承)。直接派生出某类的基类称为直接基类，基类的基类甚至更高层的基类称为间接基类。</p>
+<p>​
+<strong>继承方式</strong>规定了如何访问<strong>从基类继承的成员</strong>，指定了派生类成员以及类外对象对于从基类继承来的成员的访问权限。<strong>派生类成员</strong>是指除了基类继承来的所有成员外，新增加的数据和函数成员。不显式的给出继承方式，默认为私有继承(<code>private</code>)。</p>
+<h3 id="生成过程">生成过程</h3>
+<h4 id="吸收">吸收</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CreditAccount</span>: <span class="hljs-keyword">public</span> Account&#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 <p><code>CreditAccount</code>继承了<code>Account</code>中<strong>除构造和析构函数之外的所有非静态成员</strong>。</p>
-<h4 id="改造"><a href="#改造" class="headerlink" title="改造"></a>改造</h4><p>​        继承、<strong>同名隐藏</strong>。</p>
-<p>​        <strong>同名隐藏</strong>覆盖与隐藏，如果派生列声明了一个和某基类成员同名的新成员，派生的新成员就会隐藏外层的同名人员。</p>
-<h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><p>​        添加新的数据成员、函数成员。    </p>
-<p>​        添加构造函数与析构函数。</p>
-<p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </p>
+<h4 id="改造">改造</h4>
+<p>​ 继承、<strong>同名隐藏</strong>。</p>
+<p>​
+<strong>同名隐藏</strong>覆盖与隐藏，如果派生列声明了一个和某基类成员同名的新成员，派生的新成员就会隐藏外层的同名人员。</p>
+<h4 id="添加">添加</h4>
+<p>​ 添加新的数据成员、函数成员。</p>
+<p>​ 添加构造函数与析构函数。</p>
+<p>​</p>
 
                 
               </div>

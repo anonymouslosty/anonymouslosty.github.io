@@ -194,7 +194,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/band.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/band_deer.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
@@ -305,214 +305,199 @@
             
               <div class="markdown-body">
                 
-                <h5 id="运算符的拓展"><a href="#运算符的拓展" class="headerlink" title="运算符的拓展"></a>运算符的拓展</h5><h6 id="1-链式判断运算符"><a href="#1-链式判断运算符" class="headerlink" title="1.链式判断运算符 ?."></a>1.链式判断运算符 ?.</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-number">1.</span> obj?.<span class="hljs-property">properities</span><br><span class="hljs-comment">//判断对象的属性是否存在</span><br><span class="hljs-number">2.</span> obj?.[expressions]<br><span class="hljs-comment">//判断对象的属性是否存在</span><br><span class="hljs-number">3.</span> func?.[...args]<br><span class="hljs-comment">//函数或者方法对象是否存在</span><br></code></pre></td></tr></table></figure>
-
+                <h5 id="运算符的拓展">运算符的拓展</h5>
+<h6 id="链式判断运算符-.">1.链式判断运算符 ?.</h6>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-number">1.</span> obj?.<span class="hljs-property">properities</span><br><span class="hljs-comment">//判断对象的属性是否存在</span><br><span class="hljs-number">2.</span> obj?.[expressions]<br><span class="hljs-comment">//判断对象的属性是否存在</span><br><span class="hljs-number">3.</span> func?.[...args]<br><span class="hljs-comment">//函数或者方法对象是否存在</span><br></code></pre></td></tr></table></figure>
 <p><strong>eg:</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> hex = <span class="hljs-string">&quot;#COFFEE&quot;</span>.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/#([A-Z]+)/i</span>)?.[<span class="hljs-number">1</span>];<br><span class="hljs-comment">//COFFEE //正则表达式的使用</span><br><br><span class="hljs-keyword">let</span> <span class="hljs-title function_">a</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;这是a的匿名函数&#x27;</span>);<br>&#125;<br>a?.()<br><span class="hljs-comment">//这是a的匿名函数 </span><br><span class="hljs-comment">//等价于 a==null ? undefined :a()  函数a是null吗？是的话就赋值为undefined，否则（不是null）就执行a()</span><br></code></pre></td></tr></table></figure>
-
 <p><strong>总结：</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//Javascript中一切皆对象</span><br><br>a?.<span class="hljs-property">b</span><br><span class="hljs-comment">// 等同于</span><br>a == <span class="hljs-literal">null</span> ? <span class="hljs-literal">undefined</span> : a.<span class="hljs-property">b</span><br><span class="hljs-comment">//对象a是null吗？ 是的话就赋值为undefined,否则执行a.b  获得对象a的b属性</span><br><br>a?.[x]<br><span class="hljs-comment">// 等同于</span><br>a == <span class="hljs-literal">null</span> ? <span class="hljs-literal">undefined</span> : a[x]<br><span class="hljs-comment">//对象a是null吗？ 是的话就赋值为undefined,否则执行a[x]  获得对象a[x]的方法</span><br><br>a?.<span class="hljs-title function_">b</span>()<br><span class="hljs-comment">// 等同于</span><br>a == <span class="hljs-literal">null</span> ? <span class="hljs-literal">undefined</span> : a.<span class="hljs-title function_">b</span>()<br><span class="hljs-comment">//对象a是null吗？ 是的话就赋值为undefined,否则执行a.b()  对象a中的b()方法</span><br><br>a?.()<br><span class="hljs-comment">// 等同于</span><br>a == <span class="hljs-literal">null</span> ? <span class="hljs-literal">undefined</span> : <span class="hljs-title function_">a</span>()<br><span class="hljs-comment">//对象a是null吗？ 是的话就赋值为undefined,否则执行a()  对象a()方法</span><br></code></pre></td></tr></table></figure>
-
 <p><em>注意：</em>如果<code>a?.b()</code>里面的<code>a.b</code>有值，但不是函数，不可调用，那么<code>a?.b()</code>是会报错的。<code>a?.()</code>也是如此，如果<code>a</code>不是<code>null</code>或<code>undefined</code>，但也不是函数，那么<code>a?.()</code>会报错。</p>
-<h5 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h5><h6 id="1-为了解决的问题"><a href="#1-为了解决的问题" class="headerlink" title="1.为了解决的问题"></a>1.为了解决的问题</h6><p>对象的属性名称都是字符串，特别是自己定义的时候，特别容易冲突。</p>
-<h6 id="2-含义"><a href="#2-含义" class="headerlink" title="2.含义"></a>2.含义</h6><p><code>Symbol()</code>代表唯一的值</p>
-<h6 id="3-机制"><a href="#3-机制" class="headerlink" title="3.机制"></a>3.机制</h6><p>如果<code>Symbol()</code>的参数是一个对象，就会调用改对象的<code>toString()</code>方法，将其转为字符串，然后生成一个<code>Symbol</code>值</p>
+<h5 id="symbol">Symbol</h5>
+<h6 id="为了解决的问题">1.为了解决的问题</h6>
+<p>对象的属性名称都是字符串，特别是自己定义的时候，特别容易冲突。</p>
+<h6 id="含义">2.含义</h6>
+<p><code>Symbol()</code>代表唯一的值</p>
+<h6 id="机制">3.机制</h6>
+<p>如果<code>Symbol()</code>的参数是一个对象，就会调用改对象的<code>toString()</code>方法，将其转为字符串，然后生成一个<code>Symbol</code>值</p>
 <p><strong>eg:</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> sym = <span class="hljs-title class_">Symbol</span>(obj);<br>sym <span class="hljs-comment">// Symbol(abc)</span><br><br><span class="hljs-title class_">Symbol</span>()函数只表示当前赋值对象的描述<br><span class="hljs-keyword">let</span> a = <span class="hljs-title class_">Symbol</span>()<br><span class="hljs-keyword">let</span> b = <span class="hljs-title class_">Symbol</span>()<br>a === b <span class="hljs-comment">//false</span><br></code></pre></td></tr></table></figure>
-
-<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//1.可以给Symbol添加描述</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;Attribute a&#x27;</span>)<br><span class="hljs-title function_">conlog</span>(a.<span class="hljs-property">discription</span>)<br><span class="hljs-comment">//Attribute a</span><br><br><span class="hljs-comment">//Symbol()作为属性名，此时不能用点运算符获得属性</span><br><span class="hljs-keyword">let</span> mySymbol = <span class="hljs-title class_">Symbol</span>()<br><span class="hljs-comment">//创建变量</span><br><span class="hljs-keyword">let</span> b = &#123;<br>    [mySymbol]: <span class="hljs-string">&#x27;helo&#x27;</span><br>&#125;<br><span class="hljs-comment">//或者</span><br><span class="hljs-keyword">let</span> c=&#123;&#125;<br>c[mySymbol]=<span class="hljs-string">&#x27;helo&#x27;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(d[mySymbol]);<br><span class="hljs-comment">//获得属性</span><br><br><span class="hljs-keyword">let</span> d =&#123;<br>  [mySymbol](value)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value)<br>  &#125;<br>&#125;<br>d[mySymbol](<span class="hljs-string">&#x27;打印值&#x27;</span>)<br><span class="hljs-comment">//调用方法，注意参数args的传入方式 [name](args)&#123;expression&#125;</span><br></code></pre></td></tr></table></figure>
-
-<h6 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getArea</span>(<span class="hljs-params">shape, options</span>) &#123;<br>    <span class="hljs-keyword">let</span> area = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">switch</span> (shape) &#123;<br>        <span class="hljs-keyword">case</span> shapeType.<span class="hljs-property">triangle</span>:<br>            area = <span class="hljs-number">.5</span> * options.<span class="hljs-property">width</span> * options.<span class="hljs-property">height</span><br>            <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">case</span> shapeType.<span class="hljs-property">square</span>:<br>            area = <span class="hljs-number">6</span><br>            <span class="hljs-keyword">break</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> area<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">getArea</span>(shapeType.<span class="hljs-property">triangle</span>, &#123; <span class="hljs-attr">width</span>: <span class="hljs-number">100</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">100</span>, &#125;));<br><span class="hljs-comment">//5000</span><br></code></pre></td></tr></table></figure>
-
-<h5 id="Promise与顶层await"><a href="#Promise与顶层await" class="headerlink" title="Promise与顶层await"></a>Promise与顶层await</h5><h6 id="1-什么是Promise"><a href="#1-什么是Promise" class="headerlink" title="1.什么是Promise"></a>1.什么是Promise</h6><ul>
-<li><p>在Javascript中表示期约，说白了就是当想获取的数据需要花时间计算时候，“等”这个计算完成，再执行后面的代码，避免后面拿值拿不到。</p>
-</li>
-<li><p>解释<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lvdabao/p/es6-promise-1.html">大白话讲解Promise（一） </a></p>
-</li>
+<h6 id="总结"><strong>总结</strong></h6>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//1.可以给Symbol添加描述</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;Attribute a&#x27;</span>)<br><span class="hljs-title function_">conlog</span>(a.<span class="hljs-property">discription</span>)<br><span class="hljs-comment">//Attribute a</span><br><br><span class="hljs-comment">//Symbol()作为属性名，此时不能用点运算符获得属性</span><br><span class="hljs-keyword">let</span> mySymbol = <span class="hljs-title class_">Symbol</span>()<br><span class="hljs-comment">//创建变量</span><br><span class="hljs-keyword">let</span> b = &#123;<br>    [mySymbol]: <span class="hljs-string">&#x27;helo&#x27;</span><br>&#125;<br><span class="hljs-comment">//或者</span><br><span class="hljs-keyword">let</span> c=&#123;&#125;<br>c[mySymbol]=<span class="hljs-string">&#x27;helo&#x27;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(d[mySymbol]);<br><span class="hljs-comment">//获得属性</span><br><br><span class="hljs-keyword">let</span> d =&#123;<br>  [mySymbol](value)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value)<br>  &#125;<br>&#125;<br>d[mySymbol](<span class="hljs-string">&#x27;打印值&#x27;</span>)<br><span class="hljs-comment">//调用方法，注意参数args的传入方式 [name](args)&#123;expression&#125;</span><br></code></pre></td></tr></table></figure>
+<h6 id="应用">应用</h6>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getArea</span>(<span class="hljs-params">shape, options</span>) &#123;<br>    <span class="hljs-keyword">let</span> area = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">switch</span> (shape) &#123;<br>        <span class="hljs-keyword">case</span> shapeType.<span class="hljs-property">triangle</span>:<br>            area = <span class="hljs-number">.5</span> * options.<span class="hljs-property">width</span> * options.<span class="hljs-property">height</span><br>            <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">case</span> shapeType.<span class="hljs-property">square</span>:<br>            area = <span class="hljs-number">6</span><br>            <span class="hljs-keyword">break</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> area<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">getArea</span>(shapeType.<span class="hljs-property">triangle</span>, &#123; <span class="hljs-attr">width</span>: <span class="hljs-number">100</span>, <span class="hljs-attr">height</span>: <span class="hljs-number">100</span>, &#125;));<br><span class="hljs-comment">//5000</span><br></code></pre></td></tr></table></figure>
+<h5 id="promise与顶层await">Promise与顶层await</h5>
+<h6 id="什么是promise">1.什么是Promise</h6>
+<ul>
+<li><p>在Javascript中表示期约，说白了就是当想获取的数据需要花时间计算时候，“等”这个计算完成，再执行后面的代码，避免后面拿值拿不到。</p></li>
+<li><p>解释<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/lvdabao/p/es6-promise-1.html">大白话讲解Promise（一）</a></p></li>
 </ul>
-<h6 id="2-await"><a href="#2-await" class="headerlink" title="2.await"></a>2.await</h6><ul>
-<li>await用于等待一个<code>Promise</code>对象，只能在异步函数<code>async function    </code>中使用<ul>
+<h6 id="await">2.await</h6>
+<ul>
+<li>await用于等待一个<code>Promise</code>对象，只能在异步函数<code>async function</code>中使用
+<ul>
 <li>首先为什么是一个<code>Promise</code>对象，因为<code>await</code>我理解为一个标志，标志后面的函数需要返回<code>Promise</code>对象</li>
 <li>如果表达式的值不是<code>Promise</code>对象，<code>await</code>会把该值转换为已经正常处理的<code>Promise</code>结果并返回</li>
 <li>通过<code>Promise</code>对象实现异步</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h6 id="3-顶层await"><a href="#3-顶层await" class="headerlink" title="3.顶层await"></a>3.顶层await</h6><ul>
+<h6 id="顶层await">3.顶层await</h6>
+<ul>
 <li><p>ES6之后，可以单独使用<code>await</code>？ ==存疑==</p>
 <ul>
 <li><p>旧版本在一个async函数外单独使用<code>await</code>会引起错误，常用立即执行函数表达式(<code>IIFE</code>)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">await</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&#x27;ok&#x27;</span>) <span class="hljs-comment">//错误用法</span><br><br>(<span class="hljs-title function_">async</span>()=&gt;&#123;<br>  <span class="hljs-keyword">await</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<br>  		<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;ok&#x27;</span>)<br>  )<br>&#125;) <span class="hljs-comment">//正确用法</span><br></code></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>顶层<code>await</code>想解决的问题： ES6模块化中导入导出，防止模块之间相互访问时异步访问无值的问题。</p>
+</ul></li>
+<li><p>顶层<code>await</code>想解决的问题：
+ES6模块化中导入导出，防止模块之间相互访问时异步访问无值的问题。</p>
 <ul>
-<li><p>看下面一个例子 来源<a target="_blank" rel="noopener" href="https://blog.csdn.net/xgangzai/article/details/114314178?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-114314178-blog-115314719.t5_download_50w&spm=1001.2101.3001.4242.1&utm_relevant_index=3">为何要在Javascript中使用顶层await</a></p>
+<li><p>看下面一个例子 来源<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/xgangzai/article/details/114314178?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-114314178-blog-115314719.t5_download_50w&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=3">为何要在Javascript中使用顶层await</a></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;IE=edge&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br> 		<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;module&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./main.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 注意这边的module 像浏览器解释js脚本的风格 --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ library.js ------</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> sqrt = <span class="hljs-title class_">Math</span>.<span class="hljs-property">sqrt</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">square</span>(<span class="hljs-params">x</span>) &#123;<br>    <span class="hljs-keyword">return</span> x * x;<br>&#125;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">diagonal</span>(<span class="hljs-params">x, y</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">sqrt</span>(<span class="hljs-title function_">square</span>(x) + <span class="hljs-title function_">square</span>(y));<br>&#125;<br><span class="hljs-comment">//暴露具体的函数</span><br></code></pre></td></tr></table></figure>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ middleware.js ------ 中间件</span><br><span class="hljs-keyword">import</span> &#123; square, diagonal &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./library.js&#x27;</span>;<br> <br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Middleware&#x27;</span>);<br> <br><span class="hljs-keyword">let</span> squareOutput;<br><span class="hljs-keyword">let</span> diagonalOutput;<br> <br><span class="hljs-comment">// IIFE</span><br> (<span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">delay</span>(<span class="hljs-number">1000</span>);<br>  squareOutput = <span class="hljs-title function_">square</span>(<span class="hljs-number">13</span>);<br>  diagonalOutput = <span class="hljs-title function_">diagonal</span>(<span class="hljs-number">12</span>, <span class="hljs-number">5</span>);<br> &#125;)();<br> <br><span class="hljs-keyword">function</span> <span class="hljs-title function_">delay</span>(<span class="hljs-params">delayInms</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-title function_">resolve</span>(<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;❤️&#x27;</span>));<br>    &#125;, delayInms);<br>  &#125;);<br>&#125;<br> <span class="hljs-comment">//中间件中计算并暴露值</span><br><span class="hljs-keyword">export</span> &#123;squareOutput,diagonalOutput&#125;;<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ main.js ------</span><br><span class="hljs-keyword">import</span> &#123; squareOutput, diagonalOutput &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./middleware.js&#x27;</span>;<br> <br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput); <span class="hljs-comment">// undefined</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput); <span class="hljs-comment">// undefined</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Main&#x27;</span>);<br> <br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput), <span class="hljs-number">2000</span>);<br><span class="hljs-comment">//169</span><br> <br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput), <span class="hljs-number">2000</span>);<br><span class="hljs-comment">//13</span><br></code></pre></td></tr></table></figure>
-
 <ul>
 <li>问题：<code>main.js</code>中第一次打印，读取到了中间件中暴露出来的值，但中间件中线程并没有计算完成。</li>
-</ul>
-</li>
+</ul></li>
 <li><p>两种解决方案</p>
 <ul>
 <li><p>计算值的时候用一个<code>Promise</code>作为总的判断依据</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ middleware.js ------ 中间件</span><br><span class="hljs-keyword">import</span> &#123; square, diagonal &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./library.js&#x27;</span>;<br> <br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Middleware&#x27;</span>);<br> <br><span class="hljs-keyword">let</span> squareOutput;<br><span class="hljs-keyword">let</span> diagonalOutput;<br> <br><span class="hljs-comment">// IIFE 用export把IIFE返回的Promise暴露出去</span><br><span class="hljs-comment">// 用该Promise作为判断函数是否执行完的标准</span><br> <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (<span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">delay</span>(<span class="hljs-number">1000</span>);<br>  squareOutput = <span class="hljs-title function_">square</span>(<span class="hljs-number">13</span>);<br>  diagonalOutput = <span class="hljs-title function_">diagonal</span>(<span class="hljs-number">12</span>, <span class="hljs-number">5</span>);<br> &#125;)();<br><br> <br><span class="hljs-keyword">function</span> <span class="hljs-title function_">delay</span>(<span class="hljs-params">delayInms</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-title function_">resolve</span>(<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;❤️&#x27;</span>));<br>    &#125;, delayInms);<br>  &#125;);<br>&#125;<br> <span class="hljs-comment">//中间件中计算并暴露值</span><br><span class="hljs-keyword">export</span> &#123;squareOutput,diagonalOutput&#125;;<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ main.js ------</span><br><span class="hljs-keyword">import</span> promise,&#123;squareOutput,diagonalOutput&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./middleware.js&#x27;</span>;<br><br>promise.<span class="hljs-title function_">then</span>(<span class="hljs-function">()=&gt;</span>&#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput); <span class="hljs-comment">// 169</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput); <span class="hljs-comment">// 13</span><br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Main&#x27;</span>);<br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput), <span class="hljs-number">2000</span>);<span class="hljs-comment">// 169</span><br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput), <span class="hljs-number">2000</span>);<span class="hljs-comment">// 13</span><br>&#125;)<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>可行，但带来了新的问题<ul>
-<li><code>main.js</code>    调用中<code>middleware.js</code>中暴露出来的变量没有问题</li>
+<li>可行，但带来了新的问题
+<ul>
+<li><code>main.js</code>
+调用中<code>middleware.js</code>中暴露出来的变量没有问题</li>
 <li>但是如果有另一个模块<code>B.js</code>需要调用<code>main.js</code>，那么就需要再在<code>main.js</code>中使用一次和<code>middleware.js</code>中间件中一样的<code>IIFE Promise</code>才能让<code>B.js</code>正确访问变量。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>用导出的变量去<strong>resolve</strong> <code>IIFE promise</code></p>
+</ul></li>
+</ul></li>
+<li><p>用导出的变量去<strong>resolve</strong>
+<code>IIFE promise</code></p>
 <ul>
 <li><p>将变量作为<code>IIFE promise</code>的返回值返回</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ middleware.js ------ 中间件</span><br><span class="hljs-keyword">import</span> &#123; square, diagonal &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./library.js&#x27;</span>;<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Middleware&#x27;</span>);<br><br><span class="hljs-keyword">let</span> squareOutput;<br><span class="hljs-keyword">let</span> diagonalOutput;<br><br><span class="hljs-comment">// IIFE</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (<span class="hljs-keyword">async</span> () =&gt; &#123;<br>    <span class="hljs-keyword">await</span> <span class="hljs-title function_">delay</span>(<span class="hljs-number">1000</span>);<br>    squareOutput = <span class="hljs-title function_">square</span>(<span class="hljs-number">13</span>);<br>    diagonalOutput = <span class="hljs-title function_">diagonal</span>(<span class="hljs-number">12</span>, <span class="hljs-number">5</span>);<br>    <span class="hljs-keyword">return</span> &#123; squareOutput, diagonalOutput &#125; <span class="hljs-comment">//作为返回值返回</span><br>&#125;)();<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">delay</span>(<span class="hljs-params">delayInms</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>            <span class="hljs-title function_">resolve</span>(<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;❤️&#x27;</span>));<br>        &#125;, delayInms);<br>    &#125;);<br>&#125;<br><br><span class="hljs-keyword">export</span> &#123; squareOutput, diagonalOutput &#125;;<br><br></code></pre></td></tr></table></figure>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> promise, &#123; squareOutput, diagonalOutput &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./middleware.js&#x27;</span>;<br><br><span class="hljs-comment">//解析返回值，返回值其实就包含Promise的状态（已完成）</span><br>promise.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">&#123;squareOutput,diagonalOutput&#125;</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput); <span class="hljs-comment">// 169</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput); <span class="hljs-comment">// 13</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Main&#x27;</span>);<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput), <span class="hljs-number">2000</span>);<br>    <span class="hljs-comment">//169</span><br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput), <span class="hljs-number">2000</span>);<br>    <span class="hljs-comment">//13</span><br>&#125;)<br></code></pre></td></tr></table></figure>
-
 <ul>
-<li>问题：大部分函数模块都放在了<code>then()    </code>中，缺乏动态性和灵活性</li>
-</ul>
-</li>
+<li>问题：大部分函数模块都放在了<code>then()</code>中，缺乏动态性和灵活性</li>
+</ul></li>
 <li><p>顶层<code>await</code></p>
 <ul>
 <li><p>允许我们让模块系统去处理<code>Promise</code>之间的关系</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ middleware.js 中间件函数------</span><br><span class="hljs-keyword">import</span> &#123; square, diagonal &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./library.js&#x27;</span>;<br> <br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Middleware&#x27;</span>);<br> <br><span class="hljs-keyword">let</span> squareOutput;<br><span class="hljs-keyword">let</span> diagonalOutput;<br> <br><span class="hljs-comment">//使用顶层 await</span><br><span class="hljs-keyword">await</span> <span class="hljs-title function_">delay</span>(<span class="hljs-number">1000</span>);<br><span class="hljs-comment">//await 标志 等待delay执行完之后，才会生成squareOutput</span><br>squareOutput = <span class="hljs-title function_">square</span>(<span class="hljs-number">13</span>);<br>diagonalOutput = <span class="hljs-title function_">diagonal</span>(<span class="hljs-number">12</span>, <span class="hljs-number">5</span>);<br> <br><span class="hljs-keyword">function</span> <span class="hljs-title function_">delay</span>(<span class="hljs-params">delayInms</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-title function_">resolve</span>(<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;❤️&#x27;</span>));<br>    &#125;, delayInms);<br>  &#125;);<br>&#125;<br> <br><span class="hljs-keyword">export</span> &#123;squareOutput,diagonalOutput&#125;;<br><br></code></pre></td></tr></table></figure>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//------ main.js 主函数------</span><br><span class="hljs-keyword">import</span> &#123; squareOutput, diagonalOutput &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./middleware.js&#x27;</span>;<br> <br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput); <span class="hljs-comment">// 169</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput); <span class="hljs-comment">// 13</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;From Main&#x27;</span>);<br> <br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(squareOutput), <span class="hljs-number">2000</span>);<span class="hljs-comment">// 169</span><br><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(diagonalOutput), <span class="hljs-number">2000</span>); <span class="hljs-comment">// 13</span><br></code></pre></td></tr></table></figure></li>
-<li><p>注意：顶层<code>await</code>只在ES模块中生效，这些ES模块之间必须具备某种相互依赖关系</p>
-</li>
+<li><p>注意：顶层<code>await</code>只在ES模块中生效，这些ES模块之间必须具备某种相互依赖关系</p></li>
 <li><p>总结：</p>
 <ul>
 <li>顶层<code>await</code>顾名思义，在某个代码块的顶层，下面的代码块全需要等它。</li>
 <li>在<code>await</code>函数的<code>Promise</code>被<code>resolve</code>之前，<code>await</code>下所有的代码都不会执行。</li>
 <li>而如果仅仅在一个函数外面使用<code>await</code>，<strong>函数外面export的东西，外部也会读到</strong></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Generator函数"><a href="#Generator函数" class="headerlink" title="Generator函数"></a>Generator函数</h5><h6 id="1-遍历-Iterator"><a href="#1-遍历-Iterator" class="headerlink" title="1.遍历 Iterator"></a>1.遍历 Iterator</h6><ul>
-<li><p>任何数据结构只要部署<code>Iterator</code>接口，就可以完成遍历操作</p>
-</li>
+<h5 id="generator函数">Generator函数</h5>
+<h6 id="遍历-iterator">1.遍历 Iterator</h6>
+<ul>
+<li><p>任何数据结构只要部署<code>Iterator</code>接口，就可以完成遍历操作</p></li>
 <li><p>作用</p>
-<ol>
+<ol type="1">
 <li>为各种数据结构提供一个统一的、简便的数据访问接口</li>
 <li>使得数据结构成员能够按照某种次序排列</li>
 <li>供<code>for of</code>使用</li>
-</ol>
-</li>
+</ol></li>
 <li><p>遍历过程：</p>
-<ol>
+<ol type="1">
 <li>创建一个指针对象，指向起始位置（遍历器对象的本质是一个指针对象）</li>
 <li>第一次调用指针对象的<code>next</code>方法，可以将指针指向数据结构的第一个成员。</li>
 <li>第二次调用指针对象的<code>next</code>方法，可以将指针指向数据结构的第二个成员。</li>
 <li>不断调用指针对象的<code>next</code>方法，直到指向数据结构的结束位置</li>
-</ol>
-</li>
-<li><p>返回值<code>&#123;value: data , done: boolean&#125;</code> data是当前属性的值，done属性表示遍历是否结束</p>
-</li>
-<li><p>一个函数只要部署了``Symbol.iterator<code>属性，就被视为具有</code>iterator`接口</p>
-</li>
-<li><p><code>for of</code>循环，内部调用的就是<code>Symbol.iterator</code>方法</p>
-</li>
+</ol></li>
+<li><p>返回值<code>&#123;value: data , done: boolean&#125;</code>
+data是当前属性的值，done属性表示遍历是否结束</p></li>
+<li><p>一个函数只要部署了`<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口</p></li>
+<li><p><code>for of</code>循环，内部调用的就是<code>Symbol.iterator</code>方法</p></li>
 <li><p>常见的具有<code>iterator</code>接口的结构</p>
-<ol>
+<ol type="1">
 <li>数组</li>
 <li>Set和Map结构</li>
-<li>计算生成的数据结构（ES6数组、Set、Map）<ol>
+<li>计算生成的数据结构（ES6数组、Set、Map）
+<ol type="1">
 <li><code>entries()</code></li>
 <li><code>keys()</code></li>
 <li><code>values()</code></li>
-</ol>
-</li>
+</ol></li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> arr = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> pair <span class="hljs-keyword">of</span> arr.<span class="hljs-title function_">entries</span>()) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(pair);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<ol start="4">
+<ol start="4" type="1">
 <li><p>类似数组的对象</p>
-<ol>
+<ol type="1">
 <li>字符串</li>
 <li>DOM Nodelist对象</li>
-<li>arguments对象 </li>
+<li>arguments对象</li>
+</ol></li>
 </ol>
-</li>
-</ol>
-<p>​         <strong>注意：</strong>并不是所有的类数组对象都有Iterator接口，需要使用<code>Array.from</code>方法将其转化为数组</p>
-<ol start="5">
+<p>​
+<strong>注意：</strong>并不是所有的类数组对象都有Iterator接口，需要使用<code>Array.from</code>方法将其转化为数组</p>
+<ol start="5" type="1">
 <li><p>对象</p>
 <ul>
-<li><p>普通对象，<code>for in</code>可以遍历键名，<code>for of</code>循环会报错</p>
-</li>
+<li><p>普通对象，<code>for in</code>可以遍历键名，<code>for of</code>循环会报错</p></li>
 <li><p>如果要用<code>for of</code></p>
-<ol>
+<ol type="1">
 <li><p>用<code>Object.keys</code>方法将对象的键名生成一个数组</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">of</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(someObject)) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(key + <span class="hljs-string">&#x27;: &#x27;</span> + someObject[key]);<br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><p>用<code>Generator</code>函数将对象重新包装一下</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">c</span>: <span class="hljs-number">3</span> &#125;<br><br><span class="hljs-keyword">function</span>* <span class="hljs-title function_">entries</span>(<span class="hljs-params">obj</span>) &#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">of</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(obj)) &#123;<br>    <span class="hljs-keyword">yield</span> [key, obj[key]];<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> [key, value] <span class="hljs-keyword">of</span> <span class="hljs-title function_">entries</span>(obj)) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(key, <span class="hljs-string">&#x27;-&gt;&#x27;</span>, value);<br>&#125;<br><span class="hljs-comment">// a -&gt; 1</span><br><span class="hljs-comment">// b -&gt; 2</span><br><span class="hljs-comment">// c -&gt; 3</span><br></code></pre></td></tr></table></figure></li>
-</ol>
-</li>
+</ol></li>
+</ul></li>
+</ol></li>
 </ul>
-</li>
-</ol>
-</li>
-</ul>
-<h6 id="2-Generator函数"><a href="#2-Generator函数" class="headerlink" title="2.Generator函数"></a>2.Generator函数</h6><ul>
+<h6 id="generator函数-1">2.Generator函数</h6>
+<ul>
 <li><p>写法</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span>* <span class="hljs-title function_">generator</span>(<span class="hljs-params"></span>)&#123;       <span class="hljs-comment">//函数名前，fucntion后有星号</span><br>  <span class="hljs-keyword">yield</span> <span class="hljs-string">&#x27;hello&#x27;</span><br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;ending&#x27;</span><br>&#125;<br><br><span class="hljs-keyword">var</span> gen = <span class="hljs-title function_">generator</span>()<br></code></pre></td></tr></table></figure></li>
 <li><p>机制</p>
 <ul>
-<li><p>调用该函数后，返回一个指向内部状态的指针对象（<code>Iterator</code>对象）</p>
-</li>
+<li><p>调用该函数后，返回一个指向内部状态的指针对象（<code>Iterator</code>对象）</p></li>
 <li><p>调用遍历器的<code>next()</code>方法，使指针指向下一个状态</p>
 <ul>
-<li>第一次调用，Generator 函数开始执行，直到遇到第一个<code>yield</code>表达式为止</li>
-<li><code>yield</code>表达式<ul>
+<li>第一次调用，Generator
+函数开始执行，直到遇到第一个<code>yield</code>表达式为止</li>
+<li><code>yield</code>表达式
+<ul>
 <li>是一种暂停标志，<code>next()</code>方法遇到<code>yield</code>表达式就暂停后面的操作</li>
 <li>将紧跟在<code>yield</code>后面的表达式的值作为返回对象的<code>value</code>值</li>
-</ul>
-</li>
+</ul></li>
 <li>下一次调用<code>next</code>方法时，内部指针从函数头部或者<strong>上一次停下来的地方</strong>再继续往下执行，直到遇到下一个<code>yield</code>表达式。</li>
 <li>如果没有再遇到新的<code>yield</code>表达式，就一直运行到函数结束，直到<code>return</code>语句为止</li>
 <li>并将<code>return</code>语句后面的表达式的值，作为返回的对象的<code>value</code>属性值。</li>
-</ul>
-</li>
+</ul></li>
 <li><p><code>next()</code>方法中的参数</p>
 <ul>
 <li>该参数会被当成上一个<code>yield</code>表达式的返回值</li>
 <li>通过该参数，就能在<code>Generator()</code>函数运行后，继续向该函数中注入值</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span>* <span class="hljs-title function_">foo</span>(<span class="hljs-params">x</span>) &#123;<br>  <span class="hljs-keyword">var</span> y = <span class="hljs-number">2</span> * (<span class="hljs-keyword">yield</span> (x + <span class="hljs-number">1</span>));<br>  <span class="hljs-keyword">var</span> z = <span class="hljs-keyword">yield</span> (y / <span class="hljs-number">3</span>);<br>  <span class="hljs-keyword">return</span> (x + y + z);<br>&#125;<br><br><span class="hljs-keyword">var</span> a = <span class="hljs-title function_">foo</span>(<span class="hljs-number">5</span>);<br>a.<span class="hljs-title function_">next</span>() <br><span class="hljs-comment">// Object&#123;value:6, done:false&#125;  </span><br><span class="hljs-comment">// 第一次运行，x值为5 返回var y = 2 * (yield (x + 1))中 yield后面的(x+1)，返回值为6</span><br>a.<span class="hljs-title function_">next</span>() <br><span class="hljs-comment">// Object&#123;value:NaN, done:false&#125;</span><br><span class="hljs-comment">// 第二次运行，next()中不带参数，undefined 返回var y = 2 * undefined，返回值为NaN</span><br>a.<span class="hljs-title function_">next</span>() <br><span class="hljs-comment">// Object&#123;value:NaN, done:true&#125;</span><br><span class="hljs-comment">// 第三次运行，next()中不带参数，undefined 返回var z = undefinedw;，返回值为NaN</span><br><br><span class="hljs-keyword">var</span> b = <span class="hljs-title function_">foo</span>(<span class="hljs-number">5</span>);<br>b.<span class="hljs-title function_">next</span>() <span class="hljs-comment">// &#123; value:6, done:false &#125;</span><br>b.<span class="hljs-title function_">next</span>(<span class="hljs-number">12</span>) <span class="hljs-comment">// &#123; value:8, done:false &#125;</span><br>b.<span class="hljs-title function_">next</span>(<span class="hljs-number">13</span>) <span class="hljs-comment">// &#123; value:42, done:true &#125;</span><br></code></pre></td></tr></table></figure>
-
 <p><strong>解释：</strong></p>
-<p>上面代码中，第二次运行<code>next</code>方法的时候不带参数，导致 y 的值等于<code>2 * undefined</code>（即<code>NaN</code>），除以 3 以后还是<code>NaN</code>，因此返回对象的<code>value</code>属性也等于<code>NaN</code>。第三次运行<code>Next</code>方法的时候不带参数，所以<code>z</code>等于<code>undefined</code>，返回对象的<code>value</code>属性等于<code>5 + NaN + undefined</code>，即<code>NaN</code>。</p>
-<p>如果向<code>next</code>方法提供参数，返回结果就完全不一样了。上面代码第一次调用<code>b</code>的<code>next</code>方法时，返回<code>x+1</code>的值<code>6</code>；第二次调用<code>next</code>方法，将上一次<code>yield</code>表达式的值设为<code>12</code>，因此<code>y</code>等于<code>24</code>，返回<code>y / 3</code>的值<code>8</code>；第三次调用<code>next</code>方法，将上一次<code>yield</code>表达式的值设为<code>13</code>，因此<code>z</code>等于<code>13</code>，这时<code>x</code>等于<code>5</code>，<code>y</code>等于<code>24</code>，所以<code>return</code>语句的值等于<code>42</code>。</p>
-</li>
+<p>上面代码中，第二次运行<code>next</code>方法的时候不带参数，导致 y
+的值等于<code>2 * undefined</code>（即<code>NaN</code>），除以 3
+以后还是<code>NaN</code>，因此返回对象的<code>value</code>属性也等于<code>NaN</code>。第三次运行<code>Next</code>方法的时候不带参数，所以<code>z</code>等于<code>undefined</code>，返回对象的<code>value</code>属性等于<code>5 + NaN + undefined</code>，即<code>NaN</code>。</p>
+<p>如果向<code>next</code>方法提供参数，返回结果就完全不一样了。上面代码第一次调用<code>b</code>的<code>next</code>方法时，返回<code>x+1</code>的值<code>6</code>；第二次调用<code>next</code>方法，将上一次<code>yield</code>表达式的值设为<code>12</code>，因此<code>y</code>等于<code>24</code>，返回<code>y / 3</code>的值<code>8</code>；第三次调用<code>next</code>方法，将上一次<code>yield</code>表达式的值设为<code>13</code>，因此<code>z</code>等于<code>13</code>，这时<code>x</code>等于<code>5</code>，<code>y</code>等于<code>24</code>，所以<code>return</code>语句的值等于<code>42</code>。</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h5 id="ES6中的Module模块"><a href="#ES6中的Module模块" class="headerlink" title="ES6中的Module模块"></a>ES6中的Module模块</h5><h6 id="1-注意是ES6模块中的不是Nodejs模块中的CommonJS规范"><a href="#1-注意是ES6模块中的不是Nodejs模块中的CommonJS规范" class="headerlink" title="1. 注意是ES6模块中的不是Nodejs模块中的CommonJS规范"></a>1. 注意是ES6模块中的不是Nodejs模块中的CommonJS规范</h6><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15589375/article/details/123476690">module.exports、exports、export都是导出，有何区别？</a></p>
-<h6 id="2-ES6中export"><a href="#2-ES6中export" class="headerlink" title="2. ES6中export"></a>2. ES6中export</h6><ul>
-<li><p>ES6模块不是对象，而是通过<code>export</code>命令显式指定输出的代码，再通过<code>import</code>命令输入。</p>
-</li>
+<h5 id="es6中的module模块">ES6中的Module模块</h5>
+<h6 id="注意是es6模块中的不是nodejs模块中的commonjs规范">1.
+注意是ES6模块中的不是Nodejs模块中的CommonJS规范</h6>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15589375/article/details/123476690">module.exports、exports、export都是导出，有何区别？</a></p>
+<h6 id="es6中export">2. ES6中export</h6>
+<ul>
+<li><p>ES6模块不是对象，而是通过<code>export</code>命令显式指定输出的代码，再通过<code>import</code>命令输入。</p></li>
 <li><p>可以输出变量、函数和类</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//变量</span><br><span class="hljs-keyword">var</span> firstName = <span class="hljs-string">&#x27;Lingyi&#x27;</span>;<br><span class="hljs-keyword">var</span> lastName = <span class="hljs-string">&#x27;Zhu&#x27;</span>;<br><span class="hljs-keyword">export</span> &#123;firstName,lastName&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">var</span> firstName =<span class="hljs-string">&#x27;Lingyi&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">var</span> lastName = <span class="hljs-string">&#x27;Zhu&#x27;</span>;<br><br><span class="hljs-comment">//函数</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">multiply</span>(<span class="hljs-params">x,y</span>)&#123;<br>  <span class="hljs-keyword">return</span> x*y;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
 <li><p>通常情况下，<code>export</code>输出的变量是原本的名字，但是可以用<code>as</code>关键字来重新命名</p>
@@ -530,63 +515,69 @@
 <li>为了用户快速上手，可以不命名元素</li>
 <li>本质是系统自动给<code>default</code>后面的元素赋值为<code>default</code></li>
 <li>用户可以<code>import</code>时，设置元素的名称</li>
-<li>用于指定模块的默认输出，一个模块只能有一个默认输出，因此 <code>export default</code>模块只能使用一次</li>
-</ul>
-</li>
+<li>用于指定模块的默认输出，一个模块只能有一个默认输出，因此
+<code>export default</code>模块只能使用一次</li>
+</ul></li>
 <li><p>关于<code>const</code>变量跨模块</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//constants.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> A = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> B = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> C = <span class="hljs-number">3</span>;<br><br><span class="hljs-comment">//test1.js 写法1</span><br><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> constants <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;constants.js&#x27;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(constants.<span class="hljs-property">A</span>); <span class="hljs-comment">//1</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(constants.<span class="hljs-property">B</span>);<span class="hljs-comment">//2</span><br><br><span class="hljs-comment">//test2.js 写法2 加载单一的输出项</span><br><span class="hljs-keyword">import</span> &#123;A,C&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;constants.js.&#x27;</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(A);<span class="hljs-comment">//1</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(B);<span class="hljs-comment">//3</span><br></code></pre></td></tr></table></figure>
-
 <p>在使用的变量非常多的时候，常常专门建立一个<code>constants</code>目录，将常量写在歌中不同的文件里，然后合并在<code>index.js</code>中</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//本代码块包含两个文件的代码，分别是db.js和user.js</span><br><span class="hljs-comment">//constants/db.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> db = &#123;<br>  <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;http://my.couchdbserver.local:5984&#x27;</span>,<br>  <span class="hljs-attr">admin_username</span>: <span class="hljs-string">&#x27;admin&#x27;</span>,<br>  <span class="hljs-attr">admin_password</span>: <span class="hljs-string">&#x27;admin password&#x27;</span><br>&#125;;<br><br><span class="hljs-comment">// constants/user.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> users = [<span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;staff&#x27;</span>, <span class="hljs-string">&#x27;ceo&#x27;</span>, <span class="hljs-string">&#x27;chief&#x27;</span>, <span class="hljs-string">&#x27;moderator&#x27;</span>];<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//index.js  将上述两个js文件中的常量合并</span><br><span class="hljs-keyword">export</span> &#123;db&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;db.js&#x27;</span><br><span class="hljs-keyword">export</span> &#123;users&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;users.js&#x27;</span> <span class="hljs-comment">//跨模块常量的引入，带&#123;&#125;</span><br></code></pre></td></tr></table></figure></li>
-<li><p><code>export</code>可以出现在任何位置，只要处于模块顶层就行。在块级作用域中则会报错。</p>
-</li>
+<li><p><code>export</code>可以出现在任何位置，只要处于模块顶层就行。在块级作用域中则会报错。</p></li>
 </ul>
-<h6 id="3-ES6中import"><a href="#3-ES6中import" class="headerlink" title="3.ES6中import"></a>3.ES6中import</h6><ul>
+<h6 id="es6中import">3.ES6中import</h6>
+<ul>
 <li><p>返回一个<code>Promise</code>对象，需要用<code>.then()方法指定处理函数</code>，推荐使用<code>await</code>方法</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">renderWidget</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">//async封装Promise，下面await</span><br>  <span class="hljs-keyword">const</span> container = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;widget&#x27;</span>);<br>  <span class="hljs-keyword">if</span> (container !== <span class="hljs-literal">null</span>) &#123;<br>    <span class="hljs-comment">// 等同于</span><br>    <span class="hljs-comment">// import(&quot;./widget&quot;).then(widget =&gt; &#123;</span><br>    <span class="hljs-comment">//   widget.render(container);</span><br>    <span class="hljs-comment">// &#125;);</span><br>    <span class="hljs-keyword">const</span> widget = <span class="hljs-keyword">await</span> <span class="hljs-title function_">import</span>(<span class="hljs-string">&#x27;./widget.js&#x27;</span>); <span class="hljs-comment">//await相当于Promise中的then()，所以前面说等同于</span><br>    widget.<span class="hljs-title function_">render</span>(container);<br>  &#125;<br>&#125;<br><br><span class="hljs-title function_">renderWidget</span>();<br></code></pre></td></tr></table></figure></li>
 <li><p><code>import</code></p>
 <ul>
-<li><p>按需加载，什么时候需要，什么时候加载</p>
-</li>
-<li><p>条件加载，可以放在<code>if</code>模块中</p>
-</li>
-<li><p>允许加载模块的路径是动态生成的 <code>import(function(var))</code></p>
-</li>
+<li><p>按需加载，什么时候需要，什么时候加载</p></li>
+<li><p>条件加载，可以放在<code>if</code>模块中</p></li>
+<li><p>允许加载模块的路径是动态生成的
+<code>import(function(var))</code></p></li>
 <li><p>加载成功后，该模块会当作一个对象，作为<code>.then()</code>的参数</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//如果有default模块的话</span><br><span class="hljs-title function_">import</span>(<span class="hljs-string">&#x27;./myModule.js&#x27;</span>)<br>.<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">myModule</span> =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myModule.<span class="hljs-property">default</span>);<br>&#125;);<br></code></pre></td></tr></table></figure></li>
 <li><p>加载方式</p>
 <ul>
-<li>```html<script type='module' src="foo.js" async></script>
+<li>```html
+<script type='module' src="foo.js" async></script>
 <!--开始渲染 标签加载ok了渲染暂停执行标签 标签执行完成再继续开始渲染工作-->
-<script type='module' src='foo.js' defer></script> 
+<script type='module' src='foo.js' defer></script>
 <!--defer加和不加没啥区别-->
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><br>+ ```html<br>  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;module&#x27;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-keyword">import</span> foo <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;foo.js&#x27;</span></span><br><span class="language-javascript">    ...</span><br><span class="language-javascript">  </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h6 id="4-ES6模块和Common-JS模块的差异"><a href="#4-ES6模块和Common-JS模块的差异" class="headerlink" title="4. ES6模块和Common JS模块的差异"></a>4. ES6模块和Common JS模块的差异</h6><ul>
+<h6 id="es6模块和common-js模块的差异">4. ES6模块和Common
+JS模块的差异</h6>
+<ul>
 <li>ES6模块是对外接口的一种静态定义，在代码静态解析阶段就会完成</li>
 <li>ES6模块输出的是值的引用，模块中变化了输出也变化了。</li>
 <li>Common JS模块加载的是一个对象，该对象在脚本运行时才会生成</li>
-<li>Common JS模块输出是一个值的拷贝，内部变化，不会影响已经输出的值。</li>
-<li>其他区别<a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/module-loader">Module 的加载实现</a></li>
+<li>Common
+JS模块输出是一个值的拷贝，内部变化，不会影响已经输出的值。</li>
+<li>其他区别<a
+target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/module-loader">Module
+的加载实现</a></li>
 </ul>
-<h6 id="5-Common-JS加载ES6模块"><a href="#5-Common-JS加载ES6模块" class="headerlink" title="5.Common JS加载ES6模块"></a>5.Common JS加载ES6模块</h6><ul>
+<h6 id="common-js加载es6模块">5.Common JS加载ES6模块</h6>
+<ul>
 <li><p>CommonJS模块的<code>require()</code>不能加载ES6模块，只能用<code>import()</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">(<span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">import</span>(<span class="hljs-string">&#x27;./my-app.mjs&#x27;</span>);<br>&#125;)();<br></code></pre></td></tr></table></figure></li>
-<li><p><code>require()</code>不支持 ES6 模块的一个原因是，它是同步加载，而 ES6 模块内部可以使用顶层<code>await</code>命令，导致无法被同步加载。</p>
-</li>
+<li><p><code>require()</code>不支持 ES6
+模块的一个原因是，它是同步加载，而 ES6
+模块内部可以使用顶层<code>await</code>命令，导致无法被同步加载。</p></li>
 </ul>
-<h6 id="6-ES6加载CommonJS模块"><a href="#6-ES6加载CommonJS模块" class="headerlink" title="6.ES6加载CommonJS模块"></a>6.ES6加载CommonJS模块</h6><ul>
+<h6 id="es6加载commonjs模块">6.ES6加载CommonJS模块</h6>
+<ul>
 <li><p>ES6需要静态代码分析，而CommonJS输出的是一个对象，无法被静态解析</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 正确 只能整体加载</span><br><span class="hljs-keyword">import</span> packageMain <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;commonjs-package&#x27;</span>;<br><br><span class="hljs-comment">// 报错 不能只加载单一的输出项</span><br><span class="hljs-keyword">import</span> &#123; method &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;commonjs-package&#x27;</span>;<br><br><span class="hljs-comment">//加载输出单一项的写法（折中）</span><br><span class="hljs-keyword">import</span> packageMain <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;commonjs-package&#x27;</span>;<br><span class="hljs-keyword">const</span> &#123; method &#125; = packageMain;<br></code></pre></td></tr></table></figure></li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/290837844">深入了解ES6点<code>module export</code></a></p>
-<h5 id="随时查的技巧总结"><a href="#随时查的技巧总结" class="headerlink" title="随时查的技巧总结"></a>随时查的技巧总结</h5><p><a target="_blank" rel="noopener" href="http://t.zoukankan.com/smileyqp-p-12675287.html">变量、字符串、数值、数组、函数</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/290837844">深入了解ES6点<code>module export</code></a></p>
+<h5 id="随时查的技巧总结">随时查的技巧总结</h5>
+<p><a
+target="_blank" rel="noopener" href="http://t.zoukankan.com/smileyqp-p-12675287.html">变量、字符串、数值、数组、函数</a></p>
 
                 
               </div>
