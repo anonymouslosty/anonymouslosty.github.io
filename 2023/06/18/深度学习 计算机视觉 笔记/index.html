@@ -29,8 +29,10 @@
 <meta property="og:image" content="https://anonymouslosty.github.io/img/ssd.svg">
 <meta property="og:image" content="https://zh-v2.d2l.ai/_images/trans_conv.svg">
 <meta property="og:image" content="https://anonymouslosty.github.io/img/transposed-conv1.png">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/transposed-conv2.png">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/transposed-conv3.png">
 <meta property="article:published_time" content="2023-06-18T05:30:57.000Z">
-<meta property="article:modified_time" content="2023-07-03T14:12:14.675Z">
+<meta property="article:modified_time" content="2023-07-03T14:18:37.428Z">
 <meta property="article:author" content="Ling yi">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
@@ -244,7 +246,7 @@
         
         
         
-          116 分钟
+          117 分钟
         
       </span>
     
@@ -532,22 +534,61 @@ class="math inline">\((h,w)\)</span></li>
 <li>计算方式2
 <ul>
 <li>按转置卷积的方式计算</li>
+</ul>
+<figure>
+<img src="/img/transposed-conv1.png" srcset="/img/loading.gif" lazyload alt="transposed-conv1" />
+<figcaption aria-hidden="true">transposed-conv1</figcaption>
+</figure></li>
+</ul></li>
+<li>填充为p 步幅为1
+<ul>
+<li>计算方式1
+<ul>
+<li>将输入填充<code>k-p-1</code></li>
+<li>将核矩阵上下、左右翻转</li>
+<li>然后做正常卷积（填充0，步幅1）</li>
+</ul></li>
+<li>计算方式2
+<ul>
+<li>按转置卷积的方式计算</li>
+<li>在转置卷积的结果上去掉padding=1（外围一层）</li>
+</ul>
+<figure>
+<img src="/img/transposed-conv2.png" srcset="/img/loading.gif" lazyload alt="transposed-conv2" />
+<figcaption aria-hidden="true">transposed-conv2</figcaption>
+</figure></li>
+</ul></li>
+<li>填充为p 步幅为s
+<ul>
+<li>计算方法1
+<ul>
+<li>在行和列之间插入<code>s-1</code>行或列</li>
+<li>将输入填充<code>k-p-1</code></li>
+<li>将核矩阵上下、左右翻转</li>
+<li>然后做正常卷积（填充0，步幅1）</li>
+</ul></li>
+<li>计算方法2
+<ul>
+<li>按转置卷积的方式计算</li>
+</ul>
+<figure>
+<img src="/img/transposed-conv3.png" srcset="/img/loading.gif" lazyload alt="transposed-conv3" />
+<figcaption aria-hidden="true">transposed-conv3</figcaption>
+</figure></li>
+</ul></li>
+<li>形状换算
+<ul>
+<li>输入高（宽）为<code>n</code>，核<code>k</code>，填充<code>p</code>，步幅<code>s</code></li>
+<li>转置卷积：<code>n'=sn+k-2p-s</code>
+<ul>
+<li>卷积：<code>n'=[(n-k-2p+s)]/s</code></li>
+</ul></li>
+<li>如果让高、宽成倍增加
+<ul>
+<li><code>k=2p+s</code></li>
 </ul></li>
 </ul></li>
 </ul>
-<p><img src="/img/transposed-conv1.png" srcset="/img/loading.gif" lazyload alt="transposed-conv1" /> +
-填充为p 步幅为1 + 计算方式1 + 将输入填充<code>k-p-1</code> +
-将核矩阵上下、左右翻转 + 然后做正常卷积（填充0，步幅1） + 计算方式2 +
-按转置卷积的方式计算 + 在转置卷积的结果上去掉padding=1（外围一层） <img
-src="/img/transposed-conv2.png" srcset="/img/loading.gif" lazyload alt="transposed-conv2" /> + 填充为p
-步幅为s + 计算方法1 + 在行和列之间插入<code>s-1</code>行或列 +
-将输入填充<code>k-p-1</code> + 将核矩阵上下、左右翻转 +
-然后做正常卷积（填充0，步幅1） + 计算方法2 + 按转置卷积的方式计算 <img
-src="/img/transposed-conv3.png" srcset="/img/loading.gif" lazyload alt="transposed-conv3" /> + 形状换算 +
-输入高（宽）为<code>n</code>，核<code>k</code>，填充<code>p</code>，步幅<code>s</code>
-+ 转置卷积：<code>n'=sn+k-2p-s</code> +
-卷积：<code>n'=[(n-k-2p+s)]/s</code> + 如果让高、宽成倍增加 +
-<code>k=2p+s</code></p>
 <h5 id="总结-1">总结</h5>
 <ul>
 <li>转置卷积是一种变化了输入和核的卷积，用来达到上采样的目的</li>
