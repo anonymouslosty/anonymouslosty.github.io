@@ -27,8 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://anonymouslosty.github.io/img/r-cnn.svg">
 <meta property="og:image" content="https://anonymouslosty.github.io/img/ssd.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/trans_conv.svg">
+<meta property="og:image" content="https://anonymouslosty.github.io/img/transposed-conv1.png">
 <meta property="article:published_time" content="2023-06-18T05:30:57.000Z">
-<meta property="article:modified_time" content="2023-06-26T15:18:28.840Z">
+<meta property="article:modified_time" content="2023-07-03T14:12:14.675Z">
 <meta property="article:author" content="Ling yi">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.6k 字
+          14k 字
         
       </span>
     
@@ -242,7 +244,7 @@
         
         
         
-          81 分钟
+          116 分钟
         
       </span>
     
@@ -300,7 +302,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月26日 晚上
+                    本文最后更新于：2023年7月3日 晚上
                   
                 
               </p>
@@ -465,7 +467,6 @@ map预测每个像素的锚框可能的类别</strong> 32 x 32 x (3+2-1) x (1+1)
 <li>输出通道为16，16个滤波器</li>
 <li>每个滤波器 卷积核 3 x 3 x 64</li>
 <li>专门抽偏置特征的，卷积核里的参数慢慢训练为可以获取偏置的</li>
-<li></li>
 </ul></li>
 <li><p>无论输入图像的通道是多少，每经过一个滤波器都将生成一个通道为1的特征图。</p></li>
 <li><p>一个卷积层之内可定义多个滤波器，当前卷积层上的各个滤波器会对上一层输入的每个feature
@@ -490,6 +491,94 @@ map(不同的滤波器所提取的特征不同)。</p></li>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 模型训练</span><br>num_epochs, timer = <span class="hljs-number">20</span>, d2l.Timer()<br>animator = d2l.Animator(xlabel=<span class="hljs-string">&#x27;epoch&#x27;</span>, xlim=[<span class="hljs-number">1</span>, num_epochs],<br>                        legend=[<span class="hljs-string">&#x27;class error&#x27;</span>, <span class="hljs-string">&#x27;bbox mae&#x27;</span>])<br>net = net.to(device)<br><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_epochs):<br>    <span class="hljs-comment"># 训练精确度的和，训练精确度的和中的示例数</span><br>    <span class="hljs-comment"># 绝对误差的和，绝对误差的和中的示例数</span><br>    metric = d2l.Accumulator(<span class="hljs-number">4</span>)<br>    net.train()<br>    <span class="hljs-keyword">for</span> features, target <span class="hljs-keyword">in</span> train_iter:<br>        timer.start()<br>        trainer.zero_grad()<br>        <span class="hljs-comment"># Y 真实的物体的bbx</span><br>        <span class="hljs-comment"># 不能直接预测Y 要预测锚对应的类别和与真实bbx之间的偏移量</span><br>        X, Y = features.to(device), target.to(device)<br>        <span class="hljs-comment"># 生成多尺度的锚框，为每个锚框预测类别和偏移量</span><br>        anchors, cls_preds, bbox_preds = net(X)<br>        <span class="hljs-comment"># 为每个锚框标注类别和偏移量</span><br>        bbox_labels, bbox_masks, cls_labels = d2l.multibox_target(anchors, Y)<br>        <span class="hljs-comment"># 根据类别和偏移量的预测和标注值计算损失函数</span><br>        l = calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels,<br>                      bbox_masks)<br>        l.mean().backward()<br>        trainer.step()<br>        metric.add(cls_eval(cls_preds, cls_labels), cls_labels.numel(),<br>                   bbox_eval(bbox_preds, bbox_labels, bbox_masks),<br>                   bbox_labels.numel())<br>    cls_err, bbox_mae = <span class="hljs-number">1</span> - metric[<span class="hljs-number">0</span>] / metric[<span class="hljs-number">1</span>], metric[<span class="hljs-number">2</span>] / metric[<span class="hljs-number">3</span>]<br>    animator.add(epoch + <span class="hljs-number">1</span>, (cls_err, bbox_mae))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;class err <span class="hljs-subst">&#123;cls_err:<span class="hljs-number">.2</span>e&#125;</span>, bbox mae <span class="hljs-subst">&#123;bbox_mae:<span class="hljs-number">.2</span>e&#125;</span>&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(train_iter.dataset) / timer.stop():<span class="hljs-number">.1</span>f&#125;</span> examples/sec on &#x27;</span><br>      <span class="hljs-string">f&#x27;<span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(device)&#125;</span>&#x27;</span>)<br></code></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">X = torchvision.io.read_image(<span class="hljs-string">&#x27;../data/banana.jpg&#x27;</span>).unsqueeze(<span class="hljs-number">0</span>).<span class="hljs-built_in">float</span>()<br>img = X.squeeze(<span class="hljs-number">0</span>).permute(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>).long()<br><span class="hljs-comment"># 预测</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">predict</span>(<span class="hljs-params">X</span>):<br>    net.<span class="hljs-built_in">eval</span>() <span class="hljs-comment"># 预测模式</span><br>    anchors, cls_preds, bbox_preds = net(X.to(device))<br>    cls_probs = F.softmax(cls_preds, dim=<span class="hljs-number">2</span>).permute(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)<br>    output = d2l.multibox_detection(cls_probs, bbox_preds, anchors)<br>    idx = [i <span class="hljs-keyword">for</span> i, row <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(output[<span class="hljs-number">0</span>]) <span class="hljs-keyword">if</span> row[<span class="hljs-number">0</span>] != -<span class="hljs-number">1</span>]<br>    <span class="hljs-comment"># 只保留NMS留下的idx</span><br>    <span class="hljs-keyword">return</span> output[<span class="hljs-number">0</span>, idx]<br><br>output = predict(X)<br></code></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">display</span>(<span class="hljs-params">img, output, threshold</span>):<br>    d2l.set_figsize((<span class="hljs-number">5</span>, <span class="hljs-number">5</span>))<br>    fig = d2l.plt.imshow(img)<br>    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> output:<br>        score = <span class="hljs-built_in">float</span>(row[<span class="hljs-number">1</span>])<br>        <span class="hljs-keyword">if</span> score &lt; threshold:<br>            <span class="hljs-keyword">continue</span><br>        h, w = img.shape[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>]<br>        bbox = [row[<span class="hljs-number">2</span>:<span class="hljs-number">6</span>] * torch.tensor((w, h, w, h), device=row.device)]<br>        d2l.show_bboxes(fig.axes, bbox, <span class="hljs-string">&#x27;%.2f&#x27;</span> % score, <span class="hljs-string">&#x27;w&#x27;</span>)<br><br>display(img, output.cpu(), threshold=<span class="hljs-number">0.9</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="语义分割">语义分割</h3>
+<h4 id="转置卷积">转置卷积</h4>
+<h5 id="特点-3">特点</h5>
+<ul>
+<li>普通卷积算子不会<strong>增大</strong>输入的高、宽，通常要么不变，要么<strong>减半</strong></li>
+<li>转置卷积可以用来<strong>增大输入的高宽</strong></li>
+</ul>
+<h5 id="原因">原因</h5>
+<ul>
+<li>常用的卷积算子算到最后像素级别的数据被压缩到很小的范围</li>
+<li>但是语义分割需要输出像素级别精度的类别，所以需要数据扩充</li>
+</ul>
+<figure>
+<img src="https://zh-v2.d2l.ai/_images/trans_conv.svg" srcset="/img/loading.gif" lazyload
+alt="../_images/trans_conv.svg" />
+<figcaption aria-hidden="true">../_images/trans_conv.svg</figcaption>
+</figure>
+<h5 id="概念">概念</h5>
+<ul>
+<li>转置卷积是一种计算方式</li>
+<li>卷积一般做下采样，转置卷积一般做上采样</li>
+<li>意义在于
+<ul>
+<li>如果你使用某种卷积使得输入<span
+class="math inline">\((h,w)\)</span>变为<span
+class="math inline">\((h&#39;,w&#39;)\)</span></li>
+<li>那么你可以使用同样超参数的转置卷积，使得输入<span
+class="math inline">\((h&#39;,w&#39;)\)</span>变为<span
+class="math inline">\((h,w)\)</span></li>
+</ul></li>
+<li>填充为0 步幅为1
+<ul>
+<li>计算方式1
+<ul>
+<li>将输入填充<code>k-1</code></li>
+<li>将核矩阵上下、左右翻转</li>
+<li>做正常卷积（填充0，步幅1）</li>
+</ul></li>
+<li>计算方式2
+<ul>
+<li>按转置卷积的方式计算</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img src="/img/transposed-conv1.png" srcset="/img/loading.gif" lazyload alt="transposed-conv1" /> +
+填充为p 步幅为1 + 计算方式1 + 将输入填充<code>k-p-1</code> +
+将核矩阵上下、左右翻转 + 然后做正常卷积（填充0，步幅1） + 计算方式2 +
+按转置卷积的方式计算 + 在转置卷积的结果上去掉padding=1（外围一层） <img
+src="/img/transposed-conv2.png" srcset="/img/loading.gif" lazyload alt="transposed-conv2" /> + 填充为p
+步幅为s + 计算方法1 + 在行和列之间插入<code>s-1</code>行或列 +
+将输入填充<code>k-p-1</code> + 将核矩阵上下、左右翻转 +
+然后做正常卷积（填充0，步幅1） + 计算方法2 + 按转置卷积的方式计算 <img
+src="/img/transposed-conv3.png" srcset="/img/loading.gif" lazyload alt="transposed-conv3" /> + 形状换算 +
+输入高（宽）为<code>n</code>，核<code>k</code>，填充<code>p</code>，步幅<code>s</code>
++ 转置卷积：<code>n'=sn+k-2p-s</code> +
+卷积：<code>n'=[(n-k-2p+s)]/s</code> + 如果让高、宽成倍增加 +
+<code>k=2p+s</code></p>
+<h5 id="总结-1">总结</h5>
+<ul>
+<li>转置卷积是一种变化了输入和核的卷积，用来达到上采样的目的</li>
+<li>不等同于数学上的反卷积操作 ##### 案例</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 手撸版本</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">trans_conv</span>(<span class="hljs-params">X,K</span>):<br>    h, w = K.shape<br>      <span class="hljs-comment"># 设置输出形状</span><br>    Y = torch.zeros((X.shape[<span class="hljs-number">0</span>]+h-<span class="hljs-number">1</span>,X.shape[<span class="hljs-number">1</span>]+w-<span class="hljs-number">1</span>))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(X.shape[<span class="hljs-number">0</span>]):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(X.shape[<span class="hljs-number">1</span>]):<br>            Y[i:i+h,j:j+w] += X[i,j]*K<br>    <span class="hljs-keyword">return</span> Y<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># API版本</span><br><span class="hljs-comment"># 设置转置卷积形状</span><br>tconv = nn.ConvTranspose2d(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,kernel_size=<span class="hljs-number">2</span>,bias=<span class="hljs-literal">False</span>)<br><span class="hljs-comment"># 设置转置卷积参数</span><br>tconv.weight = K<br><span class="hljs-comment"># 计算</span><br>tconv(X)<br></code></pre></td></tr></table></figure>
+<h6 id="填充">填充</h6>
+<p>与常规卷积不同，在转置卷积中，填充被应用于的输出（常规卷积将填充应用于输入）。
+例如，当将高和宽两侧的填充数指定为1时，转置卷积的输出中将删除第一和最后的行与列。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 填补Padding</span><br><span class="hljs-comment"># Padding = 1</span><br><span class="hljs-comment"># 原过程：在“输出”的基础上 上下填补计算普通卷积得到“输入”</span><br><span class="hljs-comment"># 转置卷积过程：输入计算转置卷积再去掉上下填补的部分</span><br><span class="hljs-comment"># padding=1 把不含padding转置卷积的结果除掉padding</span><br>tconv = nn.ConvTranspose2d(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,kernel_size=<span class="hljs-number">2</span>,padding=<span class="hljs-number">1</span>,bias=<span class="hljs-literal">False</span>)<br>tconv.weigth.data = K<br>tconv(X)<br><br></code></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 步长Stride</span><br><br><span class="hljs-comment"># 步长输出计算公式 和卷积相反</span><br>tconv = nn.ConvTranspose2d(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,kernel_size=<span class="hljs-number">2</span>,bias=<span class="hljs-literal">False</span>)<br>tconv.weight.data = K<br>tconv(X)<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 与通道的关系</span><br>X = torch.rand(size=(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>))<br>conv = nn.Conv2d(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, kernel_size=<span class="hljs-number">5</span>, padding=<span class="hljs-number">2</span>, stride=<span class="hljs-number">3</span>)<br>tconv = nn.ConvTranspose2d(<span class="hljs-number">20</span>, <span class="hljs-number">10</span>, kernel_size=<span class="hljs-number">5</span>, padding=<span class="hljs-number">2</span>, stride=<span class="hljs-number">3</span>)<br>tconv(conv(X)).shape == X.shape<br><br><span class="hljs-comment"># 若卷积的过程中不发生向下取整则成立</span><br></code></pre></td></tr></table></figure>
+<h4 id="全卷积网络fcn">全卷积网络(FCN)</h4>
+<h5 id="定义">定义</h5>
+<p>全卷积网络将中间层特征图的高宽变换回输入图像的尺寸。
+最后的通道维输出该位置对应像素的类别预测。</p>
+<h5 id="构造">构造</h5>
+<p>全卷积网络先使用卷积神经网络抽取图像特征，然后通过卷积层将通道数变换为类别个数，最后在通过转置卷积层将特征图的高和宽变换为输入图像的尺寸。
+因此，模型输出与输入图像的高和宽相同，且最终输出通道包含了该空间位置像素的类别预测。</p>
+<h5 id="特点-4">特点</h5>
+<p>双线性插值常用于初始化转置卷积层</p>
+<h5 id="代码-1">代码</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">%matplotlib inline<br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torchvision<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> torch.nn <span class="hljs-keyword">import</span> functional <span class="hljs-keyword">as</span> F<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 加载预训练模型，resnet18</span><br>pretrained_net = torchvision.models.resnet18(pretrained=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># resnet18 最后的全局平均池化层和全连接层不要</span><br>net = nn.Sequential(*<span class="hljs-built_in">list</span>(pretrained_net.children())[:-<span class="hljs-number">2</span>])<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义训练类别</span><br>num_classes = <span class="hljs-number">21</span><br><br><span class="hljs-comment"># 网络最后两层改为 </span><br><span class="hljs-comment"># in_channel 512 out_channel 21类别的1x1卷积层 把通道数从512降到21</span><br><span class="hljs-comment"># in_channel 21类别 out_channel 21类别 把h w 还原为 [320,480]</span><br>net.add_module(<span class="hljs-string">&#x27;final_conv&#x27;</span>, nn.Conv2d(<span class="hljs-number">512</span>, num_classes, kernel_size=<span class="hljs-number">1</span>))<br>net.add_module(<span class="hljs-string">&#x27;transpose_conv&#x27;</span>, nn.ConvTranspose2d(num_classes, num_classes,kernel_size=<span class="hljs-number">64</span>, padding=<span class="hljs-number">16</span>, stride=<span class="hljs-number">32</span>))<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-comment"># 定义双线性上采样方法，用该方法初始化转置卷积的初始参数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">bilinear_kernel</span>(<span class="hljs-params">in_channels, out_channels, kernel_size</span>):<br>    factor = (kernel_size + <span class="hljs-number">1</span>) // <span class="hljs-number">2</span><br>    <span class="hljs-keyword">if</span> kernel_size % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>:<br>        center = factor - <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        center = factor - <span class="hljs-number">0.5</span><br>    og = (torch.arange(kernel_size).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>),<br>          torch.arange(kernel_size).reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>))<br>    filt = (<span class="hljs-number">1</span> - torch.<span class="hljs-built_in">abs</span>(og[<span class="hljs-number">0</span>] - center) / factor) * \<br>           (<span class="hljs-number">1</span> - torch.<span class="hljs-built_in">abs</span>(og[<span class="hljs-number">1</span>] - center) / factor)<br>    weight = torch.zeros((in_channels, out_channels,<br>                          kernel_size, kernel_size))<br>    weight[<span class="hljs-built_in">range</span>(in_channels), <span class="hljs-built_in">range</span>(out_channels), :, :] = filt<br>    <span class="hljs-keyword">return</span> weight<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 初始化转置卷积层参数并应用参数</span><br>W = bilinear_kernel(num_classes, num_classes, <span class="hljs-number">64</span>)<br>net.transpose_conv.weight.data.copy_(W);<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 具体训练过程</span><br>batch_size, crop_size = <span class="hljs-number">32</span>, (<span class="hljs-number">320</span>, <span class="hljs-number">480</span>)<br>train_iter, test_iter = d2l.load_data_voc(batch_size, crop_size)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">loss</span>(<span class="hljs-params">inputs, targets</span>):<br>    <span class="hljs-keyword">return</span> F.cross_entropy(inputs, targets, reduction=<span class="hljs-string">&#x27;none&#x27;</span>).mean(<span class="hljs-number">1</span>).mean(<span class="hljs-number">1</span>)<br><br>num_epochs, lr, wd, devices = <span class="hljs-number">5</span>, <span class="hljs-number">0.001</span>, <span class="hljs-number">1e-3</span>, d2l.try_all_gpus()<br>trainer = torch.optim.SGD(net.parameters(), lr=lr, weight_decay=wd)<br>d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 预测</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">loss</span>(<span class="hljs-params">inputs, targets</span>):<br>    <span class="hljs-keyword">return</span> F.cross_entropy(inputs, targets, reduction=<span class="hljs-string">&#x27;none&#x27;</span>).mean(<span class="hljs-number">1</span>).mean(<span class="hljs-number">1</span>)<br><br>num_epochs, lr, wd, devices = <span class="hljs-number">5</span>, <span class="hljs-number">0.001</span>, <span class="hljs-number">1e-3</span>, d2l.try_all_gpus()<br>trainer = torch.optim.SGD(net.parameters(), lr=lr, weight_decay=wd)<br>d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 像素标号</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">label2image</span>(<span class="hljs-params">pred</span>):<br>    colormap = torch.tensor(d2l.VOC_COLORMAP, device=devices[<span class="hljs-number">0</span>])<br>    X = pred.long()<br>    <span class="hljs-keyword">return</span> colormap[X, :]<br><span class="hljs-comment"># 测试</span><br>voc_dir = d2l.download_extract(<span class="hljs-string">&#x27;voc2012&#x27;</span>, <span class="hljs-string">&#x27;VOCdevkit/VOC2012&#x27;</span>)<br>test_images, test_labels = d2l.read_voc_images(voc_dir, <span class="hljs-literal">False</span>)<br>n, imgs = <span class="hljs-number">4</span>, []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>    crop_rect = (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">320</span>, <span class="hljs-number">480</span>)<br>    X = torchvision.transforms.functional.crop(test_images[i], *crop_rect)<br>    pred = label2image(predict(X))<br>    imgs += [X.permute(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>), pred.cpu(),<br>             torchvision.transforms.functional.crop(<br>                 test_labels[i], *crop_rect).permute(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>)]<br>d2l.show_images(imgs[::<span class="hljs-number">3</span>] + imgs[<span class="hljs-number">1</span>::<span class="hljs-number">3</span>] + imgs[<span class="hljs-number">2</span>::<span class="hljs-number">3</span>], <span class="hljs-number">3</span>, n, scale=<span class="hljs-number">2</span>);<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -554,7 +643,7 @@ map(不同的滤波器所提取的特征不同)。</p></li>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月26日</div>
+          <div>2023年7月3日</div>
         </div>
       
       <div class="license-meta-item">
