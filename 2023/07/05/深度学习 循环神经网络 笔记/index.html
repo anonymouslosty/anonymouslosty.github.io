@@ -31,8 +31,9 @@
 <meta property="og:image" content="https://anonymouslosty.github.io/img/%E6%BD%9C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B.png">
 <meta property="og:image" content="https://anonymouslosty.github.io/img/%E6%BD%9C%E5%8F%98%E9%87%8F%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.png">
 <meta property="og:image" content="https://anonymouslosty.github.io/img/RNN_init.jpg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/gru-1.svg">
 <meta property="article:published_time" content="2023-07-05T02:34:53.000Z">
-<meta property="article:modified_time" content="2023-07-10T15:30:07.764Z">
+<meta property="article:modified_time" content="2023-07-17T02:47:05.969Z">
 <meta property="article:author" content="Ling yi">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18k 字
+          19k 字
         
       </span>
     
@@ -246,7 +247,7 @@
         
         
         
-          151 分钟
+          157 分钟
         
       </span>
     
@@ -304,7 +305,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月10日 晚上
+                    本文最后更新于：2023年7月17日 上午
                   
                 
               </p>
@@ -508,24 +509,55 @@ target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_linear-network
 <ul>
 <li><p><code>data_iter</code>部分 <code>train_iter,test_iter</code></p>
 <ul>
-<li><p>加载数据<code>load_data(batch_size,num_steps,use_random_sample)</code></p></li>
-<li><p>```python # batch_size = 2 # 每次训练两个batch # num_setp = 5 #
-往后预测5个 train模式下，算5个的误差 重复两次(batch) # X-&gt;y # 3-&gt;5
-5-&gt;13 13-&gt;2 2-&gt;1 1-&gt;13 tensor([[ 3, 5, 13, 2, 1], [14, 11,
-2, 1, 17]]) tensor([[ 5, 13, 2, 1, 13], [11, 2, 1, 17, 4]])
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><br>+ `网络部分初始化`<br><br>  + <span class="hljs-variable">$n</span><span class="hljs-variable">$：</span><span class="hljs-variable">$batch</span>\_size<span class="hljs-variable">$、</span><span class="hljs-variable">$d</span><span class="hljs-variable">$：</span><span class="hljs-variable">$input</span>\_dim<span class="hljs-variable">$、</span><span class="hljs-variable">$h</span><span class="hljs-variable">$：</span><span class="hljs-variable">$hidden</span>\_num<span class="hljs-variable">$</span><br><span class="hljs-variable"></span>    + 其中<span class="hljs-variable">$d</span>=h=vobal\_size=len(vobal)<span class="hljs-variable">$</span><br><span class="hljs-variable"></span>    + <span class="hljs-variable">$W</span>\_xh<span class="hljs-variable">$：</span><span class="hljs-variable">$d</span>\cdot h<span class="hljs-variable">$,</span> <span class="hljs-variable">$W</span>\_hh<span class="hljs-variable">$：</span><span class="hljs-variable">$h</span>\cdot h<span class="hljs-variable">$，</span><span class="hljs-variable">$b_h</span><span class="hljs-variable">$：</span><span class="hljs-variable">$1</span>\cdot h<span class="hljs-variable">$,</span>（隐藏层参数）<br>    + <span class="hljs-variable">$ </span>W\_hq<span class="hljs-variable">$：</span><span class="hljs-variable">$h</span>\cdot q<span class="hljs-variable">$,</span><span class="hljs-variable">$ </span>b\_q<span class="hljs-variable">$：</span><span class="hljs-variable">$1</span>\cdot q<span class="hljs-variable">$（</span>输出层参数）<br>  + `begin_state`<span class="hljs-symbol">:-&gt;`init_rnn_state`</span>：隐藏层的隐藏单元的初始化 <span class="hljs-variable">$n</span>\cdot h<span class="hljs-variable">$ </span><br>  + `get_params`<span class="hljs-symbol">:-&gt;`self</span>.params`<span class="hljs-symbol">:</span>隐藏层与输出层参数初始化<span class="hljs-variable">$[</span><span class="hljs-title class_">W_xh</span>, <span class="hljs-title class_">W_hh</span>, b_h, <span class="hljs-title class_">W_hq</span>, b_q]<span class="hljs-variable">$</span><br><span class="hljs-variable"></span>  <br>+ `网络部分计算`<br>  <br>    +  <span class="hljs-variable">$n</span> · d · d · h<span class="hljs-variable">$</span><br><span class="hljs-variable"></span>      +  <span class="hljs-variable">$·</span> h · q + <span class="hljs-number">1</span> · q = n  ·  q  <span class="hljs-variable">$ </span>   (<span class="hljs-variable">$x_</span>&#123;t<span class="hljs-number">-1</span>&#125;<span class="hljs-variable">$计</span>算<span class="hljs-variable">$x_t</span><span class="hljs-variable">$)</span><br>      +  <span class="hljs-variable">$·</span> h · h + <span class="hljs-number">1</span> · h = n  · h <span class="hljs-variable">$（</span>更新隐藏层）<br>    <br>    +  具体过程<br>    <br>      + onehot编码: input <span class="hljs-number">5</span> · <span class="hljs-number">2</span> --&gt; <span class="hljs-number">5</span> · <span class="hljs-number">2</span> · <span class="hljs-number">32</span><br>    <br>        + num_step · batch_size --&gt; num_step · batch_size · vocal_size<br>    <br>        + ```python<br>          F.one_hot(torch.tensor([<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]), <span class="hljs-number">5</span>) <br>          tensor([[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],<br>                  [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]])<br></code></pre></td></tr></table></figure></p>
+<li>加载数据<code>load_data(batch_size,num_steps,use_random_sample)</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># batch_size = 2</span><br><span class="hljs-comment"># 每次训练两个batch</span><br><span class="hljs-comment"># num_setp = 5</span><br><span class="hljs-comment"># 往后预测5个 train模式下，算5个的误差 重复两次(batch)</span><br><span class="hljs-comment"># X-&gt;y</span><br><span class="hljs-comment"># 3-&gt;5 5-&gt;13 13-&gt;2 2-&gt;1 1-&gt;13</span><br>tensor([[ <span class="hljs-number">3</span>,  <span class="hljs-number">5</span>, <span class="hljs-number">13</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">1</span>],<br>        [<span class="hljs-number">14</span>, <span class="hljs-number">11</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">1</span>, <span class="hljs-number">17</span>]])<br>tensor([[ <span class="hljs-number">5</span>, <span class="hljs-number">13</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">1</span>, <span class="hljs-number">13</span>],<br>        [<span class="hljs-number">11</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">1</span>, <span class="hljs-number">17</span>,  <span class="hljs-number">4</span>]])<br></code></pre></td></tr></table></figure></li>
+<li><p><code>网络部分初始化</code></p>
 <ul>
-<li><p>forward计算:</p>
+<li><span class="math inline">\(n\)</span>：<span
+class="math inline">\(batch\_size\)</span>、<span
+class="math inline">\(d\)</span>：<span
+class="math inline">\(input\_dim\)</span>、<span
+class="math inline">\(h\)</span>：<span
+class="math inline">\(hidden\_num\)</span>
 <ul>
-<li>```python y = Y.T.reshape(-1) X, y = X.to(device), y.to(device)
-y_hat, state = net(X, state) # net = RNNModelScratch(len(vocab),
-num_hiddens, d2l.try_gpu(), get_params,init_rnn_state, rnn) # rnn # for
-X in inputs: # H = torch.tanh(torch.mm(X, W_xh) + torch.mm(H, W_hh) +
-b_h) # Y = torch.mm(H, W_hq) + b_q # outputs.append(Y)
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs stylus">    <br>+ loss计算与反向传播<br>    <br>  + ```python<br>    l = <span class="hljs-built_in">loss</span>(y_hat, y<span class="hljs-selector-class">.long</span>())<span class="hljs-selector-class">.mean</span>()<br>    updater<span class="hljs-selector-class">.zero_grad</span>()<br>    l<span class="hljs-selector-class">.backward</span>()<br>    <span class="hljs-built_in">grad_clipping</span>(net, <span class="hljs-number">1</span>)<br>    updater<span class="hljs-selector-class">.step</span>()<br></code></pre></td></tr></table></figure></li>
+<li>其中<span
+class="math inline">\(d=h=vobal\_size=len(vobal)\)</span></li>
+<li><span class="math inline">\(W\_xh\)</span>：<span
+class="math inline">\(d\cdot h\)</span>, <span
+class="math inline">\(W\_hh\)</span>：<span class="math inline">\(h\cdot
+h\)</span>，<span class="math inline">\(b_h\)</span>：<span
+class="math inline">\(1\cdot h\)</span>,（隐藏层参数）</li>
+<li>$ W_hq<span class="math inline">\(：\)</span>hq<span
+class="math inline">\(,\)</span> b_q$：<span
+class="math inline">\(1\cdot q\)</span>（输出层参数）</li>
 </ul></li>
+<li><code>begin_state</code>:-&gt;<code>init_rnn_state</code>：隐藏层的隐藏单元的初始化
+<span class="math inline">\(n\cdot h\)</span></li>
+<li><code>get_params</code>:-&gt;<code>self.params</code>:隐藏层与输出层参数初始化<span
+class="math inline">\([W_xh, W_hh, b_h, W_hq, b_q]\)</span></li>
 </ul></li>
-</ul></li>
+<li><p><code>网络部分计算</code></p>
+<ul>
+<li><p><span class="math inline">\(n · d · d · h\)</span> + $· h · q + 1
+· q = n · q $ (<span class="math inline">\(x_{t-1}\)</span>计算<span
+class="math inline">\(x_t\)</span>) + $· h · h + 1 · h = n · h
+$（更新隐藏层）</p></li>
+<li><p>具体过程</p></li>
+</ul>
+<pre><code class="hljs">+ onehot编码: input 5 · 2 --&gt; 5 · 2 · 32
+
+  + num_step · batch_size --&gt; num_step · batch_size · vocal_size
+
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">F.one_hot(torch.tensor([<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]), <span class="hljs-number">5</span>) <br>tensor([[<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],<br>        [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]])<br></code></pre></td></tr></table></figure>
+
++ forward计算:
+
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">y = Y.T.reshape(-<span class="hljs-number">1</span>)<br>X, y = X.to(device), y.to(device)<br>y_hat, state = net(X, state)<br><span class="hljs-comment"># net = RNNModelScratch(len(vocab), num_hiddens, d2l.try_gpu(), get_params,init_rnn_state, rnn)</span><br><span class="hljs-comment"># rnn</span><br><span class="hljs-comment">#    for X in inputs:</span><br><span class="hljs-comment">#        H = torch.tanh(torch.mm(X, W_xh) + torch.mm(H, W_hh) + b_h)</span><br><span class="hljs-comment">#        Y = torch.mm(H, W_hq) + b_q</span><br><span class="hljs-comment">#        outputs.append(Y)</span><br></code></pre></td></tr></table></figure>
+
++ loss计算与反向传播
+
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">l = loss(y_hat, y.long()).mean()<br>updater.zero_grad()<br>l.backward()<br>grad_clipping(net, <span class="hljs-number">1</span>)<br>updater.step()<br></code></pre></td></tr></table></figure></code></pre></li>
 </ul>
 <h4 id="手动实现">手动实现</h4>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> torch.nn <span class="hljs-keyword">import</span> functional <span class="hljs-keyword">as</span> F<br><span class="hljs-keyword">from</span> d2l <span class="hljs-keyword">import</span> torch <span class="hljs-keyword">as</span> d2l<br><br><span class="hljs-comment"># 加载数据 批量大小 32 时间步长 35</span><br>batch_size, num_steps = <span class="hljs-number">32</span>, <span class="hljs-number">35</span><br>train_iter, vocab = d2l.load_data_time_machine(batch_size, num_steps)<br></code></pre></td></tr></table></figure>
@@ -547,6 +579,65 @@ b_h) # Y = torch.mm(H, W_hq) + b_q # outputs.append(Y)
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 初始化隐藏单元数量</span><br><span class="hljs-comment"># 初始化隐藏层</span><br>num_hiddens = <span class="hljs-number">256</span><br><span class="hljs-comment"># 利用nn.RNN()定义RNN层</span><br><span class="hljs-comment"># 没有输出层，需要在封装的网络类中加入nn.Linear()作为输出</span><br>rnn_layer = nn.RNN(<span class="hljs-built_in">len</span>(vocab), num_hiddens)<br><span class="hljs-comment"># 初始化隐藏层状态 （隐藏层数、批量大小、隐藏单元数）</span><br>state = torch.zeros((<span class="hljs-number">1</span>, batch_size, num_hiddens))<br></code></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#@save</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">RNNModel</span>(nn.Module):<br>    <span class="hljs-string">&quot;&quot;&quot;循环神经网络模型&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rnn_layer, vocab_size, **kwargs</span>):<br>        <span class="hljs-built_in">super</span>(RNNModel, self).__init__(**kwargs)<br>        self.rnn = rnn_layer<br>        self.vocab_size = vocab_size<br>        self.num_hiddens = self.rnn.hidden_size<br>        <span class="hljs-comment"># 如果RNN是双向的（之后将介绍），num_directions应该是2，否则应该是1</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.rnn.bidirectional:<br>            self.num_directions = <span class="hljs-number">1</span><br>            self.linear = nn.Linear(self.num_hiddens, self.vocab_size)<br>        <span class="hljs-keyword">else</span>:<br>            self.num_directions = <span class="hljs-number">2</span><br>            self.linear = nn.Linear(self.num_hiddens * <span class="hljs-number">2</span>, self.vocab_size)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, inputs, state</span>):<br>        X = F.one_hot(inputs.T.long(), self.vocab_size)<br>        <span class="hljs-comment"># X 35 x 32 x 28 num_step batch_size OnehotSeq</span><br>        X = X.to(torch.float32)<br>        <span class="hljs-comment"># Y 35 x 32 x 256 num_step x batch_size x hidden_num</span><br>        <span class="hljs-comment"># state 1 x 32 x 256 最后一次训练的state state = Y[-1]</span><br>        Y, state = self.rnn(X, state)<br>        <span class="hljs-comment"># 全连接层首先将Y的形状改为(时间步数*批量大小,隐藏单元数)</span><br>        <span class="hljs-comment"># 它的输出形状是(时间步数*批量大小,词表大小)。</span><br>        <span class="hljs-comment"># 每次的状态计算每次的输出计算loss</span><br>        output = self.linear(Y.reshape((-<span class="hljs-number">1</span>, Y.shape[-<span class="hljs-number">1</span>])))<br>        <span class="hljs-keyword">return</span> output, state<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">begin_state</span>(<span class="hljs-params">self, device, batch_size=<span class="hljs-number">1</span></span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isinstance</span>(self.rnn, nn.LSTM):<br>            <span class="hljs-comment"># nn.GRU以张量作为隐状态</span><br>            <span class="hljs-keyword">return</span>  torch.zeros((self.num_directions * self.rnn.num_layers,<br>                                 batch_size, self.num_hiddens),<br>                                device=device)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-comment"># nn.LSTM以元组作为隐状态</span><br>            <span class="hljs-keyword">return</span> (torch.zeros((<br>                self.num_directions * self.rnn.num_layers,<br>                batch_size, self.num_hiddens), device=device),<br>                    torch.zeros((<br>                        self.num_directions * self.rnn.num_layers,<br>                        batch_size, self.num_hiddens), device=device))<br></code></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">device = d2l.try_gpu()<br><span class="hljs-comment"># 定义网络</span><br>net = RNNModel(rnn_layer, vocab_size=<span class="hljs-built_in">len</span>(vocab))<br>net = net.to(device)<br>num_epochs, lr = <span class="hljs-number">500</span>, <span class="hljs-number">1</span><br><span class="hljs-comment"># 训练、预测</span><br>d2l.train_ch8(net, train_iter, vocab, lr, num_epochs, device)<br>d2l.predict_ch8(<span class="hljs-string">&#x27;time traveller&#x27;</span>, <span class="hljs-number">10</span>, net, vocab, device)<br></code></pre></td></tr></table></figure>
+<h2 id="门控循环单元">门控循环单元</h2>
+<h4 id="概念-3">概念</h4>
+<p>GRU (Gated)</p>
+<h4 id="特点">特点</h4>
+<ul>
+<li>不是每一个观察值都同等重要</li>
+<li>想只记住相关的观察需要：
+<ul>
+<li>能关注到机制（更新门） Update Gate
+<ul>
+<li>信息尽量放到隐藏状态中</li>
+</ul></li>
+<li>能遗忘的机制（重置门）Reset Gate
+<ul>
+<li>隐藏状态里可以忘掉一些东西</li>
+</ul></li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://zh-v2.d2l.ai/_images/gru-1.svg" srcset="/img/loading.gif" lazyload
+alt="../_images/gru-1.svg" />
+<figcaption aria-hidden="true">../_images/gru-1.svg</figcaption>
+</figure>
+<h4 id="核心">核心</h4>
+<h5 id="更新门">更新门</h5>
+<ul>
+<li><code>[n h]</code></li>
+</ul>
+<p><span class="math display">\[\begin{split}\begin{aligned}
+\mathbf{R}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xr} + \mathbf{H}_{t-1}
+\mathbf{W}_{hr} + \mathbf{b}_r)\end{aligned}\end{split}\]</span></p>
+<h5 id="重置门">重置门</h5>
+<ul>
+<li><code>[n h]</code></li>
+</ul>
+<p><span class="math display">\[\begin{split}\begin{aligned}
+\mathbf{Z}_t = \sigma(\mathbf{X}_t \mathbf{W}_{xz} + \mathbf{H}_{t-1}
+\mathbf{W}_{hz} + \mathbf{b}_z),
+\end{aligned}\end{split}\]</span></p>
+<h5 id="候选隐状态">候选隐状态</h5>
+<ul>
+<li>用来生成真正的隐状态</li>
+<li><span class="math inline">\(R_t\)</span>用来表示对<span
+class="math inline">\(H_{t-1}\)</span>(上一步的隐状态)信息的保留量，更新新的隐藏状态的时候要用到多少过去的信息</li>
+<li><span class="math inline">\(\odot\)</span> 对应位置的元素相乘</li>
+</ul>
+<p><span class="math display">\[\tilde{\mathbf{H}}_t =
+\tanh(\mathbf{X}_t \mathbf{W}_{xh} + \left(\mathbf{R}_t \odot
+\mathbf{H}_{t-1}\right) \mathbf{W}_{hh} + \mathbf{b}_h)\]</span></p>
+<h5 id="最终隐状态">最终隐状态</h5>
+<p><span class="math display">\[\mathbf{H}_t = \mathbf{Z}_t \odot
+\mathbf{H}_{t-1}  + (1 - \mathbf{Z}_t) \odot
+\tilde{\mathbf{H}}_t.\]</span></p>
+<ul>
+<li><span class="math inline">\(Z_t\)</span>点乘上一次的隐状态 + <span
+class="math inline">\(1-Z_t\)</span> 点乘候选隐状态</li>
+<li><span class="math inline">\(Z_t=0\)</span> 相当于RNN</li>
+<li>算真正的隐藏层状态的时候要用多少新的候选隐藏状态的信息</li>
+</ul>
 
                 
               </div>
@@ -611,7 +702,7 @@ b_h) # Y = torch.mm(H, W_hq) + b_q # outputs.append(Y)
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月10日</div>
+          <div>2023年7月17日</div>
         </div>
       
       <div class="license-meta-item">
