@@ -26,7 +26,7 @@
 <meta property="og:description" content="在Web端，利用Html、CSS、Typescript语言，实现贪吃蛇游戏的功能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-08T09:16:06.000Z">
-<meta property="article:modified_time" content="2022-09-21T15:20:06.000Z">
+<meta property="article:modified_time" content="2023-07-17T12:34:01.289Z">
 <meta property="article:author" content="Ling yi">
 <meta property="article:tag" content="Typescript">
 <meta name="twitter:card" content="summary_large_image">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.8k 字
+          8.2k 字
         
       </span>
     
@@ -239,7 +239,7 @@
         
         
         
-          66 分钟
+          69 分钟
         
       </span>
     
@@ -297,7 +297,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年9月21日 晚上
+                    本文最后更新于：2023年7月17日 晚上
                   
                 
               </p>
@@ -352,48 +352,7 @@
 <h4 id="食物类">3.食物类</h4>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Food</span>&#123;<br>    <span class="hljs-comment">//定义一个属性来表示食物所对应的元素</span><br>    <span class="hljs-attr">element</span>:<span class="hljs-title class_">HTMLElement</span><br>    <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-comment">//获取页面中的food元素并赋值给Element</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">element</span> = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;food&#x27;</span>)!<br>    &#125;<br>    <span class="hljs-comment">//定义一个获取食物x轴坐标的方法</span><br>    <span class="hljs-keyword">get</span> <span class="hljs-title function_">X</span>()&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">element</span>.<span class="hljs-property">offsetLeft</span>  <span class="hljs-comment">//使得外部可以通过 food.X 和 food.Y 访问到 Food的坐标</span><br>    &#125;<br>    <span class="hljs-keyword">get</span> <span class="hljs-title function_">Y</span>()&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">element</span>.<span class="hljs-property">offsetTop</span><br>    &#125;<br>    <span class="hljs-comment">// 修改食物位置的方法</span><br>    <span class="hljs-title function_">change</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-comment">//生成一个随机的位置</span><br>        <span class="hljs-keyword">let</span> top = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">round</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>()*<span class="hljs-number">29</span>)*<span class="hljs-number">10</span><br>        <span class="hljs-keyword">let</span> left = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">round</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>()*<span class="hljs-number">29</span>)*<span class="hljs-number">10</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">element</span>.<span class="hljs-property">style</span>.<span class="hljs-property">left</span> = left+<span class="hljs-string">&#x27;px&#x27;</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">element</span>.<span class="hljs-property">style</span>.<span class="hljs-property">top</span> = top+<span class="hljs-string">&#x27;px&#x27;</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Food</span>;<br></code></pre></td></tr></table></figure>
 <h4 id="游戏控制类">4.游戏控制类</h4>
-<p>```typescript //控制其他的所有类 //引入其他类 import Snake from
-"./snake"; import Food from "./food"; import ScorePanel from
-"./scorePanel";</p>
-<p>class GameControl { //定义三个属性 snake: Snake; food: Food;
-scorePanel: ScorePanel; //创建属性 存储蛇的移动方向（按键方向）
-direction: string = ""; //创建属性 记录游戏是否结束 isLive = true;
-constructor() { this.snake = new Snake(); this.food = new Food();
-this.scorePanel = new ScorePanel(); this.init(); }</p>
-<p>//游戏的初始化方法，调用后游戏开始 init() {
-document.addEventListener("keydown",
-this.keyDownloadHandler.bind(this)); this.run();</p>
-<p>} //创建一个键盘按下的响应函数 keyDownloadHandler(event:
-KeyboardEvent) { //赋值之前需要检查方向 event.key 用户是否按了正确的按键
-this.direction = event.key;
-//用户按下按键的时候，方向值存到direction中</p>
-<p>}</p>
-<p>run() { //根据方向，使得蛇的位置改变 //向上 top值减小 向下 top值增加
-左left减少 右 left增加 //获取蛇现在的坐标 let X = this.snake.X; let Y =
-this.snake.Y; //根据按键的方向修改 X Y switch (this.direction) { case
-"ArrowUp": case "Up": Y -= 10; break; case "ArrowDown": case "Down": Y
-+= 10; break; case "ArrowLeft": case "Left": X -= 10; break; case
-"ArrowRight": case "Right": X += 10; break; }</p>
-<pre><code class="hljs">this.checkEat(X, Y)
-
-try &#123;
-  this.snake.X = X;
-  this.snake.Y = Y;
-&#125; catch (error) &#123;
-  alert(error)
-  this.isLive = false
-&#125;
-
-
-//开启定时调用
-this.isLive &amp;&amp; setTimeout(this.run.bind(this), 100 - (this.scorePanel.level - 1) * 10);</code></pre>
-<p>}</p>
-<p>//检查蛇是否吃到了食物 checkEat(X: number, Y: number) { if (X ===
-this.food.X &amp;&amp; Y === this.food.Y) { console.log('吃到食物')
-//食物的位置要重置 this.food.change() this.scorePanel.addScore()
-this.snake.addBody() }</p>
-<p>} }</p>
-<p>export default GameControl;</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">//控制其他的所有类</span><br><span class="hljs-comment">//引入其他类</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Snake</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./snake&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Food</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./food&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">ScorePanel</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./scorePanel&quot;</span>;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">GameControl</span> &#123;<br>  <span class="hljs-comment">//定义三个属性</span><br>  <span class="hljs-attr">snake</span>: <span class="hljs-title class_">Snake</span>;<br>  <span class="hljs-attr">food</span>: <span class="hljs-title class_">Food</span>;<br>  <span class="hljs-attr">scorePanel</span>: <span class="hljs-title class_">ScorePanel</span>;<br>  <span class="hljs-comment">//创建属性 存储蛇的移动方向（按键方向）</span><br>  <span class="hljs-attr">direction</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;&quot;</span>;<br>  <span class="hljs-comment">//创建属性 记录游戏是否结束</span><br>  isLive = <span class="hljs-literal">true</span>;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Snake</span>();<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">food</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Food</span>();<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">scorePanel</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ScorePanel</span>();<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">init</span>();<br>  &#125;<br><br>  <span class="hljs-comment">//游戏的初始化方法，调用后游戏开始</span><br>  <span class="hljs-title function_">init</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;keydown&quot;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">keyDownloadHandler</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>));<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">run</span>();<br><br>  &#125;<br>  <span class="hljs-comment">//创建一个键盘按下的响应函数</span><br>  <span class="hljs-title function_">keyDownloadHandler</span>(<span class="hljs-params">event: KeyboardEvent</span>) &#123;<br>    <span class="hljs-comment">//赋值之前需要检查方向 event.key  用户是否按了正确的按键</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">direction</span> = event.<span class="hljs-property">key</span>; <span class="hljs-comment">//用户按下按键的时候，方向值存到direction中</span><br><br>  &#125;<br><br>  <span class="hljs-title function_">run</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">//根据方向，使得蛇的位置改变</span><br>    <span class="hljs-comment">//向上 top值减小 向下 top值增加 左left减少 右 left增加</span><br>    <span class="hljs-comment">//获取蛇现在的坐标</span><br>    <span class="hljs-keyword">let</span> X = <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-property">X</span>;<br>    <span class="hljs-keyword">let</span> Y = <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-property">Y</span>;<br>    <span class="hljs-comment">//根据按键的方向修改 X Y</span><br>    <span class="hljs-keyword">switch</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">direction</span>) &#123;<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;ArrowUp&quot;</span>:<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;Up&quot;</span>:<br>        Y -= <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;ArrowDown&quot;</span>:<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;Down&quot;</span>:<br>        Y += <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;ArrowLeft&quot;</span>:<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;Left&quot;</span>:<br>        X -= <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;ArrowRight&quot;</span>:<br>      <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;Right&quot;</span>:<br>        X += <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">checkEat</span>(X, Y)<br><br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-property">X</span> = X;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-property">Y</span> = Y;<br>    &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>      <span class="hljs-title function_">alert</span>(error)<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">isLive</span> = <span class="hljs-literal">false</span><br>    &#125;<br><br>    <span class="hljs-comment">//开启定时调用</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isLive</span> &amp;&amp; <span class="hljs-built_in">setTimeout</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">run</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>), <span class="hljs-number">100</span> - (<span class="hljs-variable language_">this</span>.<span class="hljs-property">scorePanel</span>.<span class="hljs-property">level</span> - <span class="hljs-number">1</span>) * <span class="hljs-number">10</span>);<br>  &#125;<br><br>  <span class="hljs-comment">//检查蛇是否吃到了食物 </span><br>  <span class="hljs-title function_">checkEat</span>(<span class="hljs-params">X: <span class="hljs-built_in">number</span>, Y: <span class="hljs-built_in">number</span></span>) &#123;<br>    <span class="hljs-keyword">if</span> (X === <span class="hljs-variable language_">this</span>.<span class="hljs-property">food</span>.<span class="hljs-property">X</span> &amp;&amp; Y === <span class="hljs-variable language_">this</span>.<span class="hljs-property">food</span>.<span class="hljs-property">Y</span>) &#123;<br>      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;吃到食物&#x27;</span>)<br>      <span class="hljs-comment">//食物的位置要重置</span><br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">food</span>.<span class="hljs-title function_">change</span>()<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">scorePanel</span>.<span class="hljs-title function_">addScore</span>()<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-title function_">addBody</span>()<br>    &#125;<br><br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">GameControl</span>;<br><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -458,7 +417,7 @@ this.snake.addBody() }</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年9月21日</div>
+          <div>2023年7月17日</div>
         </div>
       
       <div class="license-meta-item">
