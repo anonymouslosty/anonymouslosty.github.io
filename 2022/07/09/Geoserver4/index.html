@@ -26,7 +26,7 @@
 <meta property="og:description" content="一、WMS 问题  WMS参考">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-09T07:38:32.000Z">
-<meta property="article:modified_time" content="2023-07-17T12:29:13.132Z">
+<meta property="article:modified_time" content="2023-07-19T15:30:53.405Z">
 <meta property="article:author" content="Ling yi">
 <meta property="article:tag" content="WebGIS">
 <meta property="article:tag" content="GeoServer">
@@ -298,7 +298,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月17日 晚上
+                    本文最后更新于：2023年7月19日 晚上
                   
                 
               </p>
@@ -313,27 +313,26 @@ target="_blank" rel="noopener" href="https://www.osgeo.cn/geoserver-user-manual/
 <span id="more"></span></li>
 </ul>
 <h5 id="getcapabilities">1. GetCapabilities</h5>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs html">http://localhost:8080/geoserver/wms?<br>service=wms&amp; //服务名称<br>version=1.1.1&amp;//服务版本<br>request=GetCapabilities//请求功能<br></code></pre></td></tr></table></figure>
 <ul>
-<li>有三个参数传递给WMS服务器， <code>service=wms</code> ，
-<code>version=1.1.1</code> 和 <code>request=GetCapabilities</code> .
-这个 <code>service</code> 参数告诉WMS服务器即将发出WMS请求。这个
-<code>version</code> 参数引用正在请求的WMS版本。这个
-<code>request</code> 参数指定getCapabilities操作。</li>
+<li>``` http://localhost:8080/geoserver/wms? service=wms&amp; //服务名称
+version=1.1.1&amp;//服务版本 request=GetCapabilities//请求功能
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs dts"><br>+ 有三个参数传递给WMS服务器， `<span class="hljs-attr">service</span><span class="hljs-operator">=</span>wms` ， `<span class="hljs-attr">version</span><span class="hljs-operator">=</span><span class="hljs-number">1.1</span><span class="hljs-number">.1</span>` 和 `<span class="hljs-attr">request</span><span class="hljs-operator">=</span>GetCapabilities` . 这个 `service` 参数告诉WMS服务器即将发出WMS请求。这个 `version` 参数引用正在请求的WMS版本。这个 `request` 参数指定getCapabilities操作。<br><br><span class="hljs-meta">##### 2. GetMap</span><br><br>+ ```<br><span class="hljs-symbol">  http:</span><span class="hljs-comment">//localhost:8080/geoserver/wms?</span><br>  <span class="hljs-attr">request</span><span class="hljs-operator">=</span>GetMap <span class="hljs-comment">//请求功能</span><br>  <span class="hljs-variable">&amp;service</span>=WMS<span class="hljs-comment">//服务名称</span><br>  <span class="hljs-variable">&amp;version</span>=<span class="hljs-number">1.1</span><span class="hljs-number">.1</span><span class="hljs-comment">//服务版本</span><br>  <span class="hljs-variable">&amp;layers</span>=topp%<span class="hljs-number">3</span>Astates<br>  <span class="hljs-variable">&amp;styles</span>=population<br>  <span class="hljs-variable">&amp;srs</span>=EPSG%<span class="hljs-number">3</span>A4326 <span class="hljs-comment">// SRS 坐标</span><br>  <span class="hljs-variable">&amp;bbox</span>=<span class="hljs-number">-145.15104058007</span>,<span class="hljs-number">21.731919794922</span>,<span class="hljs-number">-57.154894212888</span>,<span class="hljs-number">58.961058642578</span>&amp;<br>  <span class="hljs-variable">&amp;width</span>=<span class="hljs-number">780</span><br>  <span class="hljs-variable">&amp;height</span>=<span class="hljs-number">330</span><br>  <span class="hljs-variable">&amp;format</span>=image%<span class="hljs-number">2F</span>png<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="getmap">2. GetMap</h5>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs HTML">http://localhost:8080/geoserver/wms?<br>request=GetMap //请求功能<br>&amp;service=WMS//服务名称<br>&amp;version=1.1.1//服务版本<br>&amp;layers=topp%3Astates<br>&amp;styles=population<br>&amp;srs=EPSG%3A4326 // SRS 坐标<br>&amp;bbox=-145.15104058007,21.731919794922,-57.154894212888,58.961058642578&amp;<br>&amp;width=780<br>&amp;height=330<br>&amp;format=image%2Fpng<br></code></pre></td></tr></table></figure>
 <h5 id="getfeatureinfo">3.GetFeatureInfo</h5>
 <ul>
-<li>请求XML</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs html">http://localhost:8080/geoserver/wms?<br>request=GetFeatureInfo<br>&amp;service=WMS<br>&amp;version=1.1.1<br>&amp;layers=topp%3Astates<br>&amp;styles=<br>&amp;srs=EPSG%3A4326<br>&amp;format=image%2Fpng<br>&amp;bbox=-145.151041%2C21.73192%2C-57.154894%2C58.961059<br>&amp;width=780<br>&amp;height=330<br>&amp;query_layers=topp%3Astates<br>&amp;info_format=text%2Fhtml<br>&amp;feature_count=50<br>&amp;x=353<br>&amp;y=145<br>&amp;exceptions=application%2Fvnd.ogc.se_xml<br></code></pre></td></tr></table></figure>
-<ul>
+<li><p>请求XML</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//localhost:8080/geoserver/wms?</span><br><span class="hljs-attr">request</span><span class="hljs-operator">=</span>GetFeatureInfo<br><span class="hljs-variable">&amp;service</span>=WMS<br><span class="hljs-variable">&amp;version</span>=<span class="hljs-number">1.1</span><span class="hljs-number">.1</span><br><span class="hljs-variable">&amp;layers</span>=topp%<span class="hljs-number">3</span>Astates<br><span class="hljs-variable">&amp;styles</span>=<br><span class="hljs-variable">&amp;srs</span>=EPSG%<span class="hljs-number">3</span>A4326<br><span class="hljs-variable">&amp;format</span>=image%<span class="hljs-number">2F</span>png<br><span class="hljs-variable">&amp;bbox</span>=<span class="hljs-number">-145.151041</span>%<span class="hljs-number">2</span>C21<span class="hljs-number">.73192</span>%<span class="hljs-number">2</span>C<span class="hljs-number">-57.154894</span>%<span class="hljs-number">2</span>C58<span class="hljs-number">.961059</span><br><span class="hljs-variable">&amp;width</span>=<span class="hljs-number">780</span><br><span class="hljs-variable">&amp;height</span>=<span class="hljs-number">330</span><br><span class="hljs-variable">&amp;query_layers</span>=topp%<span class="hljs-number">3</span>Astates<br><span class="hljs-variable">&amp;info_format</span>=text%<span class="hljs-number">2F</span>html<br><span class="hljs-variable">&amp;feature_count</span>=<span class="hljs-number">50</span><br><span class="hljs-variable">&amp;x</span>=<span class="hljs-number">353</span><br><span class="hljs-variable">&amp;y</span>=<span class="hljs-number">145</span><br><span class="hljs-variable">&amp;exceptions</span>=application%<span class="hljs-number">2F</span>vnd.ogc.se_xml<br></code></pre></td></tr></table></figure></li>
 <li><p>请求GeoJson</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html">http://localhost:8080/geoserver/wms?<br>&amp;INFO_FORMAT=application/json<br>&amp;REQUEST=GetFeatureInfo<br>&amp;EXCEPTIONS=application/vnd.ogc.se_xml<br>&amp;SERVICE=WMS<br>&amp;VERSION=1.1.1<br>&amp;WIDTH=970&amp;HEIGHT=485&amp;X=486&amp;Y=165&amp;BBOX=-180,-90,180,90<br>&amp;LAYERS=COUNTRYPROFILES:grp_administrative_map<br>&amp;QUERY_LAYERS=COUNTRYPROFILES:grp_administrative_map<br>&amp;TYPENAME=COUNTRYPROFILES:grp_administrative_map<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//localhost:8080/geoserver/wms?</span><br><span class="hljs-variable">&amp;</span>INFO_FORMAT=application/json<br><span class="hljs-variable">&amp;</span>REQUEST=GetFeatureInfo<br><span class="hljs-variable">&amp;</span>EXCEPTIONS=application/vnd.ogc.se_xml<br><span class="hljs-variable">&amp;</span>SERVICE=WMS<br><span class="hljs-variable">&amp;</span>VERSION=<span class="hljs-number">1.1</span><span class="hljs-number">.1</span><br><span class="hljs-variable">&amp;</span>WIDTH=<span class="hljs-number">970</span><span class="hljs-variable">&amp;</span>HEIGHT=<span class="hljs-number">485</span><span class="hljs-variable">&amp;</span>X=<span class="hljs-number">486</span><span class="hljs-variable">&amp;</span>Y=<span class="hljs-number">165</span><span class="hljs-variable">&amp;</span>BBOX=<span class="hljs-number">-180</span>,<span class="hljs-number">-90</span>,<span class="hljs-number">180</span>,<span class="hljs-number">90</span><br><span class="hljs-variable">&amp;</span>LAYERS=COUNTRYPROFILES:grp_administrative_map<br><span class="hljs-variable">&amp;</span>QUERY_LAYERS=COUNTRYPROFILES:grp_administrative_map<br><span class="hljs-variable">&amp;</span>TYPENAME=COUNTRYPROFILES:grp_administrative_map<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h5 id="describe-layer">4.Describe Layer</h5>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html">http://localhost:8080/geoserver/wms?service=WMS<br>&amp;version=1.1.1<br>&amp;request=DescribeLayer<br>&amp;layers=sf:roads,topp:tasmania_roads,nurc:mosaic<br>&amp;outputFormat=application/json<br></code></pre></td></tr></table></figure>
+<ul>
+<li><pre><code class="hljs">  http://localhost:8080/geoserver/wms?service=WMS
+  &amp;version=1.1.1
+  &amp;request=DescribeLayer
+  &amp;layers=sf:roads,topp:tasmania_roads,nurc:mosaic
+  &amp;outputFormat=application/json</code></pre></li>
+</ul>
 
                 
               </div>
@@ -400,7 +399,7 @@ target="_blank" rel="noopener" href="https://www.osgeo.cn/geoserver-user-manual/
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月17日</div>
+          <div>2023年7月19日</div>
         </div>
       
       <div class="license-meta-item">
