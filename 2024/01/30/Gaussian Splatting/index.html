@@ -64,7 +64,7 @@
 <meta property="og:image" content="https://anonymouslosty.github.io/img/GS36.PNG">
 <meta property="og:image" content="https://anonymouslosty.github.io/img/GS37.PNG">
 <meta property="article:published_time" content="2024-01-30T03:56:23.000Z">
-<meta property="article:modified_time" content="2024-01-30T06:25:34.047Z">
+<meta property="article:modified_time" content="2024-02-04T03:49:41.314Z">
 <meta property="article:author" content="Ling yi">
 <meta property="article:tag" content="Gaussian Splatting">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,7 +278,7 @@
         
         
         
-          25 分钟
+          26 分钟
         
       </span>
     
@@ -336,7 +336,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年1月30日 下午
+                    本文最后更新于：2024年2月4日 中午
                   
                 
               </p>
@@ -499,6 +499,7 @@ v2.0</a></p>
 <h3 id="点云导入">点云导入</h3>
 <p><font color='red'>观察到Properties为62，除去x,y,z,nx,ny,nz六个自动匹配的属性后，还需要在Scalar
 field属性中添加56个属性</font></p>
+<p><font color='red'><strong>注意，添加属性的顺序一定要和原始高斯ply中的顺序保持一致！！！</strong></font></p>
 <figure>
 <img src="/img/GS18.PNG" srcset="/img/loading.gif" lazyload alt="导入点云属性" />
 <figcaption aria-hidden="true">导入点云属性</figcaption>
@@ -550,6 +551,7 @@ field属性中添加56个属性</font></p>
 <img src="/img/GS27.PNG" srcset="/img/loading.gif" lazyload alt="CloudCompare保存Ply头文件" />
 <figcaption aria-hidden="true">CloudCompare保存Ply头文件</figcaption>
 </figure>
+<p><font color='red'><strong>需要在CloudCompare保存结果的头文件中，将CloudCompare的信息删除</strong></font></p>
 <p><font color='red'>需要在CloudCompare保存结果的头文件中，将<strong>scalar_</strong>字段(注意有下划线)删除，使得两者头文件中记载的属性保持一致</font></p>
 <h2 id="模型查看">模型查看</h2>
 <h3 id="sibr-viewer">SIBR Viewer</h3>
@@ -685,7 +687,7 @@ Undistorted</figcaption>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年1月30日</div>
+          <div>2024年2月4日</div>
         </div>
       
       <div class="license-meta-item">
